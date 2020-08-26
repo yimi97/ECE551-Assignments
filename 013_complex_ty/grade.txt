@@ -1,0 +1,8 @@
+Grading at 08/26/2020:00:32:25.758334
+For commit ID a14e17c6074259f422fb99aa5641fa60917fea58
+Grading at Tue Aug 25 20:32:25 EDT 2020
+Checking syntax of declarations, and code that uses them
+mytypes.c makes legal, useable declarations
+Your file matched the expected output
+
+Overall Grade: PASSED
