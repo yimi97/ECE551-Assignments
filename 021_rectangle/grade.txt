@@ -1,10 +1,8 @@
-Grading at 08/30/2020:12:51:42.379381
-For commit ID a252f74e529a8462fd20be2094152cba2e1679e3
-Grading at Sun Aug 30 08:51:42 EDT 2020
+Grading at 08/30/2020:13:07:22.694828
+For commit ID bad1b8305e9aed2383b92ee8b9c1505ae42c79ba
+Grading at Sun Aug 30 09:07:22 EDT 2020
 Attempting to compile rectangle.c
 Tring to run rectangle
-Line_9_did_not_match
-Line_13_did_not_match
 Line_19_did_not_match
 Your file did not match the expected ouput
 Your output did not match what we expected. Here is what you printed
@@ -16,11 +14,11 @@ intersection(r1,r1): (2,3) to (7,9)
 intersection(r1,r2): (2,3) to (4,5)
 intersection(r1,r3): (2,3) to (5,7)
 intersection(r1,r4): <empty>
-intersection(r2,r1): (2,3) to (7,9)
+intersection(r2,r1): (2,3) to (4,5)
 intersection(r2,r2): (-1,-2) to (4,5)
 intersection(r2,r3): (-1,-2) to (4,5)
 intersection(r2,r4): <empty>
-intersection(r3,r1): (2,3) to (7,9)
+intersection(r3,r1): (2,3) to (5,7)
 intersection(r3,r2): (-1,-2) to (4,5)
 intersection(r3,r3): (-2,-3) to (5,7)
 intersection(r3,r4): (-2,7) to (0,7)
