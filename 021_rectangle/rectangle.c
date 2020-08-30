@@ -60,10 +60,12 @@ rectangle intersection(rectangle r1, rectangle r2) {
     r1.height = 0;
   }
   else {
+    int x_tmp = r1.x;
+    int y_tmp = r1.y;
     r1.x = max(r1.x, r2.x);
     r1.y = max(r1.y, r2.y);
-    r1.width = min(r1.x + r1.width, r2.x + r2.width) - r1.x;
-    r1.height = min(r1.y + r1.height, r2.y + r2.height) - r1.y;
+    r1.width = min(x_tmp + r1.width, r2.x + r2.width) - r1.x;
+    r1.height = min(y_tmp + r1.height, r2.y + r2.height) - r1.y;
   }
 
   return r1;
