@@ -1,0 +1,66 @@
+Grading at 09/03/2020:20:44:33.787814
+For commit ID 5795235541ebd87b1faa4a9c86ecb611d3ab98ab
+Grading at Thu Sep  3 16:44:32 EDT 2020
+**Testing broken implementation 10 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 2.
+ 
+**Testing broken implementation 11 **
+-------------------------------------
+
+ERROR: -1 to the power 2 should be 1, not 49.
+ 
+**Testing broken implementation 1 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 2.
+ 
+**Testing broken implementation 2 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 25.
+ 
+**Testing broken implementation 3 **
+-------------------------------------
+
+ERROR: 0 to the power 0 should be 1, not 0.
+ 
+**Testing broken implementation 4 **
+-------------------------------------
+
+ERROR: 7 to the power 7 should be 823543, not 37111.
+ 
+**Testing broken implementation 5 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 0.
+ 
+**Testing broken implementation 6 **
+-------------------------------------
+
+ERROR: 7 to the power 7 should be 823543, not 128.
+ 
+**Testing broken implementation 7 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 243.
+ 
+**Testing broken implementation 8 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 10.
+ 
+**Testing broken implementation 9 **
+-------------------------------------
+
+ERROR: 2 to the power 5 should be 32, not 0.
+ 
+**Testing correct implementation **
+-------------------------------------
+
+
+All tests were ok.
+
+
+Overall Grade: PASSED
