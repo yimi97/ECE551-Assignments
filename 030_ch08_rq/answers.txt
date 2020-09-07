@@ -10,7 +10,7 @@ F
 B
 B
 C
-F
+C
 C
 B
 C
