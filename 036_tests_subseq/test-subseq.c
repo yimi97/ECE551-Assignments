@@ -27,7 +27,8 @@ int main(void) {
   int arr7[] = {3, 2, 1};
   int arr8[] = {0};
   int arr9[6] = {1, 2, 3};
-  int arr10[] = {};
+  // an array can not have zero size
+  // int arr10[] = {};
   int arr11[] = {-1};
   int arr12[] = {352436664};
   int arr13[] = {1, 2, 3, 4, 4, 6, 7, 8};
@@ -46,7 +47,7 @@ int main(void) {
   run_check(arr7, 3, 1);
   run_check(arr8, 1, 1);
   run_check(arr9, 6, 3);
-  run_check(arr10, 0, 0);
+  // run_check(arr10, 0, 0);
   run_check(arr11, 1, 1);
   run_check(arr12, 1, 1);
   run_check(arr13, 8, 4);
