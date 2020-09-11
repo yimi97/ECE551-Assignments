@@ -1,0 +1,3 @@
+myProgram: maxSeq.o test-subseq.o
+	gcc -o myProgram maxSeq.o test-subseq.o
+test-subseq.o: test-subseq.c
