@@ -8,17 +8,14 @@ void reverse(char * str) {
     if (strcmp(str, "") == 0) {
       return;
     }
+    // First figure out if the pointer if NULL, since strcmp() will seg fault if the input is NULL!!!
     char tmp;
     int mylen = 0;
-    //  size_t mylen = strlen(str);
-    // size_t mid = mylen / 2;
     char * ptr = str;
     while (*ptr != '\0') {
       mylen++;
       ptr++;
     }
-    // strcpy()
-    // char tmp[mylen];
     for (int i = 0; i < mylen / 2; i++) {
       tmp = str[i];
       str[i] = str[mylen - 1 - i];
