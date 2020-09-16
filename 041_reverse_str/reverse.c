@@ -4,7 +4,7 @@
 
 void reverse(char * str) {
   //WRITE ME!
-  if (strcmp(str, "") == 0 || !str) {
+  if (strcmp(str, "") == 0 || str == NULL) {
     return;
   }
   size_t mylen = strlen(str);
