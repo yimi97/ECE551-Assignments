@@ -1,15 +1,13 @@
-Grading at 09/16/2020:00:45:04.211299
-For commit ID ecce65394e1a326b2259cdbfa88f65d645a1c965
-Grading at Tue Sep 15 20:45:03 EDT 2020
+Grading at 09/16/2020:00:49:29.157225
+For commit ID 7b5157cb6f62023eff5c9b62d1d9a1ac78b70b56
+Grading at Tue Sep 15 20:49:28 EDT 2020
 Attempting to compile  reverse.c
-Line_8_did_not_match
-Your file did not match the expected ouput
-Your output did not match what we expected.
+Your file matched the expected output
+Your output matched what we expected
 Removing your main() and replacing it with our own to run more tests...
 #################################################
 testcase2:
- - Your program segfaulted.
-your code failed the testcase
+your code passed the testcase
 #################################################
 testcase3:
 Your file matched the expected output
@@ -20,4 +18,4 @@ Your file matched the expected output
 testcase5:
 Your file matched the expected output
 
-Overall Grade: D
+Overall Grade: A
