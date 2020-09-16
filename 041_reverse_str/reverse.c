@@ -4,17 +4,19 @@
 
 void reverse(char * str) {
   //WRITE ME!
-  if (strcmp(str, "") == 0 || str == NULL) {
+  if (strcmp(str, "") == 0) {
     return;
   }
-  size_t mylen = strlen(str);
-  size_t mid = mylen / 2;
-  // strcpy()
-  // char tmp[mylen];
-  for (int i = 0; i < mid; i++) {
-    char tmp = str[i];
-    str[i] = str[mylen - 1 - i];
-    str[mylen - 1 - i] = tmp;
+  if (str != NULL) {
+    size_t mylen = strlen(str);
+    size_t mid = mylen / 2;
+    // strcpy()
+    // char tmp[mylen];
+    for (int i = 0; i < mid; i++) {
+      char tmp = str[i];
+      str[i] = str[mylen - 1 - i];
+      str[mylen - 1 - i] = tmp;
+    }
   }
 }
 
