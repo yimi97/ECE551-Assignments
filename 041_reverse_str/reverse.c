@@ -8,12 +8,19 @@ void reverse(char * str) {
     return;
   }
   if (str != NULL) {
-    size_t mylen = strlen(str);
-    size_t mid = mylen / 2;
+    char tmp;
+    int mylen = 0;
+    //  size_t mylen = strlen(str);
+    // size_t mid = mylen / 2;
+    char * ptr = str;
+    while (*ptr != '\0') {
+      mylen++;
+      ptr++;
+    }
     // strcpy()
     // char tmp[mylen];
-    for (int i = 0; i < mid; i++) {
-      char tmp = str[i];
+    for (int i = 0; i < mylen / 2; i++) {
+      tmp = str[i];
       str[i] = str[mylen - 1 - i];
       str[mylen - 1 - i] = tmp;
     }
@@ -34,5 +41,8 @@ int main(void) {
     reverse(array[i]);
     printf("%s\n", array[i]);
   }
+  char test[] = "a";
+  reverse(test);
+  printf("%s\n", test);
   return EXIT_SUCCESS;
 }
