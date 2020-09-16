@@ -4,10 +4,10 @@
 
 void reverse(char * str) {
   //WRITE ME!
-  if (strcmp(str, "") == 0) {
-    return;
-  }
   if (str != NULL) {
+    if (strcmp(str, "") == 0) {
+      return;
+    }
     char tmp;
     int mylen = 0;
     //  size_t mylen = strlen(str);
@@ -41,8 +41,5 @@ int main(void) {
     reverse(array[i]);
     printf("%s\n", array[i]);
   }
-  char test[] = "a";
-  reverse(test);
-  printf("%s\n", test);
   return EXIT_SUCCESS;
 }
