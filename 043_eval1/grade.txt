@@ -1,0 +1,53 @@
+Grading at 09/17/2020:01:06:07.641645
+For commit ID 8f85b8e48dc02f568427adf419f9347aa7b2fbde
+Grading at Wed Sep 16 21:06:07 EDT 2020
+Doing some basic checking for your submission.
+
+Checking that your code compiles
+rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCountries.o -o printCountries
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printRunningAvg.o -o printRunningAvg
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printCumulative.o -o printCumulative
+gcc -std=gnu99 -Werror -Wall -pedantic -ggdb3 pandemic.c printDailyMax.o -o printDailyMax
+The code compiled (good)
+
+Checking with the provided test cases
+
+Testing ./printCountries population.csv 
+Your file matched the expected output
+Passed
+
+Testing ./printRunningAvg population.csv daily_cases.csv
+Line_2_did_not_match
+Line_4_did_not_match
+Line_6_did_not_match
+Line_8_did_not_match
+Line_10_did_not_match
+Line_12_did_not_match
+Line_14_did_not_match
+Line_16_did_not_match
+Line_18_did_not_match
+Your file did not match the expected ouput
+Failed
+
+Testing ./printCumulative population.csv daily_cases.csv
+Line_2_did_not_match
+Line_4_did_not_match
+Line_6_did_not_match
+Line_8_did_not_match
+Line_10_did_not_match
+Line_12_did_not_match
+Line_14_did_not_match
+Line_16_did_not_match
+Line_18_did_not_match
+Your file did not match the expected ouput
+Failed
+
+Testing ./printDailyMax population.csv daily_cases.csv
+Your file did not match the expected ouput
+Failed
+
+You have NOT passed the pregrader tests
+You should debug the indicated test cases
+
+Overall Grade: NO GRADE YET
