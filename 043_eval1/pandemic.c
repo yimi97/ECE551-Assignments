@@ -42,8 +42,8 @@ country_t parseLine(char * line) {
 //}
 //}
 
-double cal_avg(unsigned * array, size_t n, unsigned * start, size_t days) {
-  int sum = 0;
+double cal_avg(unsigned * start, size_t days) {
+  double sum = 0;
   for (int i = 0; i < days; i++) {
     sum += *start;
     start++;
@@ -59,18 +59,19 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   int cycle = 0;
   for (int i = 0; i < n_days; i += 7) {
     if (n_days - i < 7) {
-      average = cal_avg(data, n_days, ptr, n_days - i);
+      average = cal_avg(ptr, n_days - i);
       cycle = n_days / 7;
       avg[cycle] = average;
       break;
     }
     else {
-      average = cal_avg(data, n_days, ptr, 7);
+      average = cal_avg(ptr, 7);
       ptr += 7;
       cycle = i / 7;
       avg[cycle] = average;
     }
   }
+  avg[cycle + 1] = '\0';
 }
 
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
