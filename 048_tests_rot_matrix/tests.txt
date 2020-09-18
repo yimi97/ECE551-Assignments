@@ -1,12 +1,11 @@
-./rotateMatrix input1.txt
-./rotateMatrix input_na.txt
-./rotateMatrix
-./rotateMatrix input1.txt test
+input_na.txt
 input1.txt
-rotateMatrix input1.txt
-./rotate
-./rotateMatrix input2.txt
-./rotateMatrix input3.txt
-./rotateMatrix input4.txt
-./rotateMatrix input5.txt
-./rotateMatrix input6.txt
+
+input1.txt input2.txt
+input2.txt
+input3.txt
+input4.txt
+input5.txt
+input6.txt
+input7.txt
+input8.txt
