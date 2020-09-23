@@ -1,56 +1,76 @@
 #include "pandemic.h"
 
+#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
 
+/**
+ * @a funtion used to parse a string line to country name and population.
+ * @param line A string need to be parsed.
+ * @return country_t.          
+ */
 country_t parseLine(char * line) {
-  //WRITE ME
+  // Check first if the pointer pointing to NULL.
   if (line == NULL) {
-    // error msg
+    printf("Parseline: This line is NULL.\n");
     exit(EXIT_FAILURE);
   }
-  // if wrong type, error msg
   country_t ans;
-  // ans.name[0] = '\0';
-  // ans.population = 0;
   char * ptr = line;
   char pop[100];
   char myname[64];
-  int i = 0;
+  int i = 0;  // An index indicating the ith element in myname and pop array.
+  // Skip blank spaces, like "  ABC,123".
+  while (*ptr == ' ') {
+    ptr++;
+  }
+  // Start to record each name char.
   while (*ptr != ',') {
     myname[i] = *ptr;
     ptr++;
     i++;
   }
   myname[i] = '\0';
+  // Spik the comma.
   ptr++;
   i = 0;
+  // Start to record each number char.
   while (*ptr != '\0') {
+    // Check if the char is punctuation or english letter. If yes, exit.
+    if (ispunct(*ptr) || isalpha(*ptr)) {
+      printf("Parseline: There is non-number inside population.");
+      exit(EXIT_FAILURE);
+    }
+    // Check if the char is a blank space. If yes, skip.
+    if (*ptr == ' ') {
+      ptr++;
+      continue;
+    }
     pop[i] = *ptr;
     ptr++;
     i++;
   }
-
-  // ans.name = myname;
   strcpy(ans.name, myname);
   ans.population = atoi(pop);
   return ans;
 }
-//unsigned * substring(unsigned * array, size_t start, size_t sub_length, size_t n){
-//unsigned * sub_arr[sub_length];
-//for(size_t i =0;i<sub_length;i++){
-//sub_arr[i] = array[i+start];
-//}
-//}
 
+/**
+ * @a funtion used to calculate seven-day running average of case data.
+ * @param data An array of daily case data.
+ * @param n_days The number of days over which the data is measured.
+ * @param avg An array of numbers to hold the running average, which should be n_days-7.
+ * @return void.          
+ */
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
-  //WRITE ME
   unsigned * start = data;
-  unsigned * move;
+  unsigned * move;  // A pointer moving from the start date to the seven days behind.
   double average;
   unsigned sum = 0;
+  // The length of avg should be n_days-6.
   for (int i = 0; i < n_days - 6; i++) {
     move = start;
+    // Move the pointer to get the sum number of cases of seven days.
     for (int j = i; j < i + 7; j++) {
       sum += *move;
       move++;
@@ -62,11 +82,18 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   }
 }
 
+/**
+ * @a funtion used to calculate the cumulative number of cases that day per 100,000 people.
+ * @param data : An array of daily case data.
+ * @param n_days : The number of days over which the data is measured.
+ * @param pop : The population of that country.
+ * @param cum: An array of doubles cum.
+ * @return void.          
+ */
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
-  //WRITE ME
   unsigned * ptr = data;
   unsigned cumulative = 0;
-  // double temp = 100000 / pop;
+  // Move the ptr to calculate cumulative cases.
   for (int i = 0; i < n_days; i++) {
     cumulative += *ptr;
     cum[i] = (double)cumulative * 100000 / pop;
@@ -74,15 +101,24 @@ void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) 
   }
 }
 
+/**
+ * @a funtion used to find the maximum number of daily cases of all countries.
+ * @param data : A 2-D array which holds each country's data.
+ * @param n_countries: The number of the countries.
+ * @param countries: An array of country_t. 
+ * @param n_days: The number of days.
+ * @return void.          
+ */
 void printCountryWithMax(country_t * countries,
                          size_t n_countries,
                          unsigned ** data,
                          size_t n_days) {
-  //WRITE ME
-  unsigned max_cases = 0;
-  int country_i;
+  unsigned max_cases = 0;  // Store the max cases.
+  int country_i;           // Store the country index with the max cases.
+  // Iterate the data array.
   for (int i = 0; i < n_countries; i++) {
     for (int j = 0; j < n_days; j++) {
+      // Compare the data with max_cases and replace to the max one.
       if (data[i][j] > max_cases) {
         country_i = i;
         max_cases = data[i][j];
