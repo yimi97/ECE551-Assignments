@@ -54,24 +54,21 @@ double cal_avg(unsigned * start, size_t days) {
 
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   //WRITE ME
-  unsigned * ptr = data;
+  unsigned * start = data;
+  unsigned * move;
   double average;
-  int cycle = 0;
-  for (int i = 0; i < n_days; i += 7) {
-    if (n_days - i < 7) {
-      average = cal_avg(ptr, n_days - i);
-      cycle = n_days / 7;
-      avg[cycle] = average;
-      break;
+  double sum = 0;
+  for (int i = 0; i < n_days - 6; i++) {
+    move = start;
+    for (int j = i; j < i + 7; j++) {
+      sum += *move;
+      move++;
     }
-    else {
-      average = cal_avg(ptr, 7);
-      ptr += 7;
-      cycle = i / 7;
-      avg[cycle] = average;
-    }
+    average = (double)sum / 7;
+    sum = 0;
+    avg[i] = average;
+    start++;
   }
-  avg[cycle + 1] = '\0';
 }
 
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
