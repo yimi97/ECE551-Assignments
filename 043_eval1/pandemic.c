@@ -64,11 +64,11 @@ void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
 void calcCumulative(unsigned * data, size_t n_days, uint64_t pop, double * cum) {
   //WRITE ME
   unsigned * ptr = data;
-  unsigned sum;
+  unsigned cumulative = 0;
   // double temp = 100000 / pop;
   for (int i = 0; i < n_days; i++) {
-    sum += *ptr;
-    cum[i] = (double)sum * 100000 / pop;
+    cumulative += *ptr;
+    cum[i] = (double)cumulative * 100000 / pop;
     ptr++;
   }
 }
