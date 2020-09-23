@@ -1,5 +1,6 @@
 #include "pandemic.h"
 
+#include <stdio.h>
 #include <string.h>
 
 country_t parseLine(char * line) {
@@ -78,4 +79,16 @@ void printCountryWithMax(country_t * countries,
                          unsigned ** data,
                          size_t n_days) {
   //WRITE ME
+  unsigned max_cases = 0;
+  int country_i;
+  for (int i = 0; i < n_countries; i++) {
+    for (int j = 0; j < n_days; j++) {
+      if (data[i][j] > max_cases) {
+        country_i = i;
+        max_cases = data[i][j];
+      }
+    }
+  }
+  country_t * ptr = countries + country_i;
+  printf("%s has the most daily cases with %u\n", ptr->name, max_cases);
 }
