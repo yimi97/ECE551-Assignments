@@ -42,22 +42,12 @@ country_t parseLine(char * line) {
 //}
 //}
 
-double cal_avg(unsigned * start, size_t days) {
-  double sum = 0;
-  for (int i = 0; i < days; i++) {
-    sum += *start;
-    start++;
-  }
-  double avg = (double)sum / days;
-  return avg;
-}
-
 void calcRunningAvg(unsigned * data, size_t n_days, double * avg) {
   //WRITE ME
   unsigned * start = data;
   unsigned * move;
   double average;
-  double sum = 0;
+  unsigned sum = 0;
   for (int i = 0; i < n_days - 6; i++) {
     move = start;
     for (int j = i; j < i + 7; j++) {
