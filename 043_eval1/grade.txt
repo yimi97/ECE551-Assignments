@@ -1,6 +1,6 @@
-Grading at 09/23/2020:05:44:14.541867
-For commit ID c1bd2417bff13195ab57f6985812851dc57f695b
-Grading at Wed Sep 23 01:44:14 EDT 2020
+Grading at 09/23/2020:05:47:55.156647
+For commit ID ec6368c5fbc3d1b0a6518abb2940610940b05d2c
+Grading at Wed Sep 23 01:47:54 EDT 2020
 Doing some basic checking for your submission.
 
 Checking that your code compiles
@@ -22,16 +22,8 @@ Your file matched the expected output
 Passed
 
 Testing ./printCumulative pop.csv daily.csv
-Line_4_did_not_match
-Line_6_did_not_match
-Line_8_did_not_match
-Line_10_did_not_match
-Line_12_did_not_match
-Line_14_did_not_match
-Line_16_did_not_match
-Line_18_did_not_match
-Your file did not match the expected ouput
-Failed
+Your file matched the expected output
+Passed
 
 Testing ./printDailyMax pop.csv daily.csv
 Your file did not match the expected ouput
