@@ -7,7 +7,8 @@
 
 int main(void) {
   char * p = "a  1 23  ";
-  int num = atoi(p);
+  char * p1 = "";
+  int num = atoi(p1);
   printf("%d", num);
   if (isdigit(*p) == 0) {
     printf("non number");

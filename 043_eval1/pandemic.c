@@ -6,7 +6,7 @@
 
 /**
  * @a funtion used to parse a string line to country name and population.
- * @param line A string need to be parsed.
+ * @param line : A string need to be parsed.
  * @return country_t.          
  */
 country_t parseLine(char * line) {
@@ -15,12 +15,16 @@ country_t parseLine(char * line) {
     printf("Parseline: This line is NULL.\n");
     exit(EXIT_FAILURE);
   }
+  if (strchr(line, ',') == NULL) {
+    printf("Parseline: No comma. Not correct format.");
+    exit(EXIT_FAILURE);
+  }
   country_t ans;
   char * ptr = line;
   char pop[100];
   char myname[64];
   int i = 0;  // An index indicating the ith element in myname and pop array.
-  // Skip blank spaces, like "  ABC,123".
+  // Check if the first chr is comma.
   while (*ptr == ' ') {
     ptr++;
   }
@@ -30,25 +34,41 @@ country_t parseLine(char * line) {
     ptr++;
     i++;
   }
+  if ((i == 0) || (*line == ',')) {
+    printf("Parseline: There is no country name information.\n");
+    exit(EXIT_FAILURE);
+  }
   myname[i] = '\0';
   // Spik the comma.
   ptr++;
-  i = 0;
+  int j = 0;
+  if (*ptr == '\0') {
+    printf("Parseline: There is no population information");
+    exit(EXIT_FAILURE);
+  }
   // Start to record each number char.
   while (*ptr != '\0') {
-    // Check if the char is punctuation or english letter. If yes, exit.
+    // Check if the char is punctuation or english letter or space. If yes, exit.
     if (ispunct(*ptr) || isalpha(*ptr)) {
       printf("Parseline: There is non-number inside population.");
       exit(EXIT_FAILURE);
     }
-    // Check if the char is a blank space. If yes, skip.
-    if (*ptr == ' ') {
-      ptr++;
-      continue;
+    // Check if there is space inside the number.
+    if ((j != 0) && *ptr == ' ') {
+      printf("Parseline: There is space inside the number.\n");
+      exit(EXIT_FAILURE);
     }
-    pop[i] = *ptr;
+    // If not a space, keep Adding to the pop array.
+    if (*ptr != ' ') {
+      pop[j] = *ptr;
+      j++;
+    }
     ptr++;
-    i++;
+  }
+  // Check if there is no numbers.
+  if (j == 0) {
+    printf("Parseline: There is no population information.\n");
+    exit(EXIT_FAILURE);
   }
   strcpy(ans.name, myname);
   ans.population = atoi(pop);
