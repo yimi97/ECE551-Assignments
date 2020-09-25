@@ -46,7 +46,6 @@ void readAFile(FILE * f) {
 int main(int argc, char ** argv) {
   FILE * f;
   if (argc == 1) {
-    printf("Enter a lines:\n");
     f = stdin;
     /*
     if (f == NULL) {
