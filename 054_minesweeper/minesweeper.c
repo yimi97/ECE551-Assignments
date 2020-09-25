@@ -43,7 +43,7 @@ board_t * makeBoard(int w, int h, int numMines) {
   //WRITE ME!
   int i, j;
   board_t * res = malloc(sizeof(*res));
-  res->board = malloc(h * sizeof(*res->board));
+  res->board = malloc(h * sizeof(*res->board));  // *res->board type: *int
   for (i = 0; i < h; i++) {
     res->board[i] = malloc(w * sizeof(**res->board));
   }
@@ -55,8 +55,14 @@ board_t * makeBoard(int w, int h, int numMines) {
   res->width = w;
   res->height = h;
   res->totalMines = numMines;
+  int k = 0;
+  while (k < numMines) {
+    addRandomMine(res);
+    k++;
+  }
   return res;
 }
+
 void printBoard(board_t * b) {
   int found = 0;
   printf("    ");
