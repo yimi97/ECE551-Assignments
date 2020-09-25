@@ -47,37 +47,13 @@ int main(int argc, char ** argv) {
   FILE * f;
   if (argc == 1) {
     f = stdin;
-    /*
-    if (f == NULL) {
-      perror("Could not open file./n");
-      exit(EXIT_FAILURE);
-    }
-    */
     readAFile(f);
-    /*
-    if (fclose(f) != 0) {
-      perror("Failed to close the input file.\n");
-      exit(EXIT_FAILURE);
-    }
-    */
     exit(EXIT_SUCCESS);
   }
 
   for (int numOfFiles = 1; numOfFiles < argc; numOfFiles++) {
     f = fopen(argv[numOfFiles], "r");
-    /*
-    if (f == NULL) {
-      perror("Could not open file./n");
-      exit(EXIT_FAILURE);
-    }
-    */
     readAFile(f);
-    /*
-    if (fclose(f) != 0) {
-      perror("Failed to close the input file.\n");
-      exit(EXIT_FAILURE);
-    }
-    */
   }
 
   return EXIT_SUCCESS;
