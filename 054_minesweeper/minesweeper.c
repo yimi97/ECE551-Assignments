@@ -118,8 +118,8 @@ int countMines(board_t * b, int x, int y) {
   int res = 0;
   for (int i = -1; i < 2; i++) {
     for (int j = -1; j < 2; j++) {
-      if ((x + i >= 0) && (x + i < b->height) && (y + j >= 0) && (y + j < b->width)) {
-        if (IS_MINE(b->board[x + i][y + j])) {
+      if ((y + i >= 0) && (y + i < b->height) && (x + j >= 0) && (x + j < b->width)) {
+        if (IS_MINE(b->board[y + i][x + j])) {
           res++;
         }
       }
@@ -150,12 +150,11 @@ int checkWin(board_t * b) {
   for (int i = 0; i < b->height; i++) {
     for (int j = 0; j < b->width; j++) {
       if (b->board[i][j] == UNKNOWN) {
-        return -1;
+        return 0;
       }
     }
   }
-
-  return 0;
+  return 1;
 }
 
 void freeBoard(board_t * b) {
@@ -164,6 +163,7 @@ void freeBoard(board_t * b) {
     free(b->board[i]);
   }
   free(b->board);
+  free(b);
 }
 
 int readInt(char ** linep, size_t * lineszp) {
