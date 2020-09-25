@@ -14,40 +14,72 @@ int stringOrder(const void * vp1, const void * vp2) {
 void sortData(char ** data, size_t count) {
   qsort(data, count, sizeof(char *), stringOrder);
 }
-
-int main(int argc, char ** argv) {
-  if (argc < 1) {  //==1
-    printf("Enter a string?/n");
-    getchar();
-    printf("sss");
-    exit(EXIT_SUCCESS);
+// This function will read a file and print the sorted lines.
+void readAFile(FILE * f) {
+  if (f == NULL) {
+    perror("Could not open file./n");
+    exit(EXIT_FAILURE);
   }
-  //WRITE YOUR CODE HERE!
   char ** lines = NULL;
   char * curr = NULL;
   size_t sz;
   size_t i = 0;
-  FILE * f;
-  for (int numOfFiles = 1; numOfFiles < argc; i++) {
-    f = fopen(argv[numOfFiles], "r");
-    while (getline(&curr, &sz, f) >= 0) {
-      lines = realloc(lines, (i + 1) * sizeof(*lines));
-      lines[i] = curr;
-      curr = NULL;
-      i++;
-    }
-    free(curr);
-    sortData(lines, i);
-    for (size_t j = 0; j < i; j++) {
-      printf("%s", lines[j]);
-      free(lines[j]);
-    }
-    free(lines);
-    //   lines = NULL;
-    //curr = NULL;
-    i = 0;
+  while (getline(&curr, &sz, f) >= 0) {
+    lines = realloc(lines, (i + 1) * sizeof(*lines));
+    lines[i] = curr;
+    curr = NULL;
+    i++;
   }
-  // FILE * f = fopen("name.txt", "r");
+  free(curr);
+  sortData(lines, i);
+  for (size_t j = 0; j < i; j++) {
+    printf("%s", lines[j]);
+    free(lines[j]);
+  }
+  free(lines);
+  if (fclose(f) != 0) {
+    perror("Failed to close the input file.\n");
+    exit(EXIT_FAILURE);
+  }
+}
+
+int main(int argc, char ** argv) {
+  FILE * f;
+  if (argc == 1) {
+    printf("Enter a lines:\n");
+    f = stdin;
+    /*
+    if (f == NULL) {
+      perror("Could not open file./n");
+      exit(EXIT_FAILURE);
+    }
+    */
+    readAFile(f);
+    /*
+    if (fclose(f) != 0) {
+      perror("Failed to close the input file.\n");
+      exit(EXIT_FAILURE);
+    }
+    */
+    exit(EXIT_SUCCESS);
+  }
+
+  for (int numOfFiles = 1; numOfFiles < argc; numOfFiles++) {
+    f = fopen(argv[numOfFiles], "r");
+    /*
+    if (f == NULL) {
+      perror("Could not open file./n");
+      exit(EXIT_FAILURE);
+    }
+    */
+    readAFile(f);
+    /*
+    if (fclose(f) != 0) {
+      perror("Failed to close the input file.\n");
+      exit(EXIT_FAILURE);
+    }
+    */
+  }
 
   return EXIT_SUCCESS;
 }
