@@ -28,6 +28,7 @@ kvpair_t parseLine(char * curr) {
   }
   kv.value = realloc(kv.value, (i + 1) * sizeof(*kv.value));
   kv.value[i] = '\0';
+  free(curr);  // why!!!
   return kv;
 }
 
