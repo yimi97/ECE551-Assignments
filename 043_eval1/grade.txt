@@ -1,6 +1,6 @@
-Grading at 09/29/2020:20:22:00.940831
+Grading at 09/30/2020:18:54:02.206772
 For commit ID e012de60d99bc4c49e7e835c6750ea04b4a129fd
-Grading at Tue Sep 29 16:21:43 EDT 2020
+Grading at Wed Sep 30 14:53:44 EDT 2020
 
 Checking that your code compiles
 rm -f *~ printCountries printRunningAvg printCumulative printDailyMax
@@ -45,7 +45,9 @@ Your program did not indicate a failure case
 +-----------------------------------------------------------------------+
 Test case 3
 Parseline: There is non-number inside population.Your program did not indicate a failure case
-                                                         [0/2]
+  Oh no! It printed to stdout instead of stderr
+  It did exit with a failure status though
+                                                         [1.0/2]
 +-----------------------------------------------------------------------+
 Test case 4
 Brazil: 212559409
@@ -64,7 +66,9 @@ Your program did not indicate a failure case
 +-----------------------------------------------------------------------+
 Test case 5
 Parseline: There is non-number inside population.Your program did not indicate a failure case
-                                                         [0/1]
+  Oh no! It printed to stdout instead of stderr
+  It did exit with a failure status though
+                                                         [.5/1]
 +-----------------------------------------------------------------------+
 Test case 6
 Your file matched the expected output
@@ -90,7 +94,7 @@ Test case 11
 Your file matched the expected output
                                                          [1/1]
 
-Step 1 total                                             [20/30]
+Step 1 total                                             [21.5/30]
 
 =========================================================================
 Step 2
@@ -197,4 +201,4 @@ Quality total                                            [9.6/10]
 
 =========================================================================
 
-Overall Grade: 90
+Overall Grade: 91
