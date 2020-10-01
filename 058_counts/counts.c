@@ -8,6 +8,7 @@ counts_t * createCounts(void) {
   counts_t * myCount = malloc(sizeof(*myCount));
   myCount->arr = NULL;
   myCount->sz = 0;
+  myCount->count_unknown = 0;
   return myCount;
 }
 void addCount(counts_t * c, const char * name) {
@@ -16,9 +17,10 @@ void addCount(counts_t * c, const char * name) {
     c->count_unknown++;
   }
   else {
-    if (c->arr == NULL) {
+    if (c->sz == 0) {
       c->arr = malloc(sizeof(*c->arr));
       c->sz++;
+      //      c->arr->str = NULL;
       c->arr->str = malloc((strlen(name) + 1) * sizeof(*c->arr->str));
       strcpy(c->arr->str, name);
       c->arr->count = 1;
@@ -28,7 +30,6 @@ void addCount(counts_t * c, const char * name) {
       for (size_t i = 0; i < c->sz; i++) {
         if (strcmp(name, ptr->str) == 0) {
           ptr->count++;
-          //          return EXIT_SUCCESS;
           return;
         }
         ptr++;
@@ -36,6 +37,7 @@ void addCount(counts_t * c, const char * name) {
       if (ptr == c->arr + c->sz) {
         c->arr = realloc(c->arr, (c->sz + 1) * sizeof(*c->arr));
         c->sz++;
+        // c->arr[c->sz - 1].str = NULL;
         c->arr[c->sz - 1].str = malloc((strlen(name) + 1) * sizeof(*c->arr->str));
         strcpy(c->arr[c->sz - 1].str, name);
         c->arr[c->sz - 1].count = 1;
@@ -54,6 +56,7 @@ void printCounts(counts_t * c, FILE * outFile) {
   if (c->count_unknown != 0) {
     fprintf(outFile, "<unknown> : %ld\n", c->count_unknown);
   }
+  fclose(outFile);
 }
 
 void freeCounts(counts_t * c) {
