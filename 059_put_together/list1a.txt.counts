@@ -1,22 +1,6 @@
-apple
-: 1
-avacado
-: 1
-raspberry
-: 1
-blueberry
-: 1
-cherry
-: 1
-eggplant
-: 1
-grapes
-: 1
-peach
-: 1
-pineapple
-: 1
-strawberry
-: 1
-fig
-: 1
+red: 3
+green: 1
+blue: 1
+purple: 2
+yellow: 2
+<unknown> : 2
