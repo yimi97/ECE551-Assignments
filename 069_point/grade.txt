@@ -1,6 +1,6 @@
-Grading at 10/09/2020:03:48:28.994877
-For commit ID 0cad3441dda6469d7bac7372338f7bd4dad505ac
-Grading at Thu Oct  8 23:48:27 EDT 2020
+Grading at 10/09/2020:03:49:50.224399
+For commit ID dec3da3a216a01b76bcb8e3e46b5adda0cc8c768
+Grading at Thu Oct  8 23:49:49 EDT 2020
 Attempting to compile:
 rm -f  point.o  main.o points *~
 g++ -c -Wall -Werror -std=gnu++98 -pedantic -ggdb3 point.cpp
