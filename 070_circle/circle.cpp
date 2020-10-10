@@ -19,8 +19,8 @@ double Circle::intersectionArea(const Circle & otherCircle) {
   }
   double x = (-r2 * r2 + r1 * r1 + d * d) / (2 * d);
   double y = (r2 * r2 - r1 * r1 + d * d) / (2 * d);
-  double rad1 = (acos(x / r1) * r1 * r1) / 2;
-  double rad2 = (acos(y / r2) * r2 * r2) / 2;
+  double rad1 = (acos(x / r1) * r1 * r1);
+  double rad2 = (acos(y / r2) * r2 * r2);
   double diamond = sqrt(r2 * r2 - y * y) * d;
 
   return rad1 + rad2 - diamond;
