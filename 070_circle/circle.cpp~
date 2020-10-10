@@ -1,0 +1,7 @@
+#include "circle.hpp"
+
+double Circle::intersectionArea(const Circle & otherCircle) {
+  double d = p.distanceFrom(otherCircle.p);
+
+  return 0;
+}
