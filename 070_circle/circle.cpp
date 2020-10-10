@@ -1,5 +1,5 @@
 #include "circle.hpp"
-
+#define PI 3.14159285
 double Circle::intersectionArea(const Circle & otherCircle) {
   double d = p.distanceFrom(otherCircle.p);
   double r1, r2;
@@ -13,6 +13,9 @@ double Circle::intersectionArea(const Circle & otherCircle) {
   }
   if (r1 + r2 <= d) {
     return 0;
+  }
+  if (r2 - r1 >= d) {
+    return r1 * r1 * PI;
   }
   double x = (-r2 * r2 + r1 * r1 + d * d) / (2 * d);
   double y = (r2 * r2 - r1 * r1 + d * d) / (2 * d);
