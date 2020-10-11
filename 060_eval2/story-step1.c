@@ -14,29 +14,10 @@ int main(int argc, char ** argv) {
   }
 
   // DO STH
-  template_t * template = parseTemplate(f);
-  char printStr[1000] = {0};
-  /*  for (size_t i=0;i<template->blank_sz;i++){
-    template->word_arr[template->blank_arr[i]]
-    }*/
-  //size_t b = template->blank_arr[0]; // b must exist?
-  for (size_t i = 0; i < template->word_sz; i++) {
-    printf("%s\n", template->word_arr[i].word);
-    if (template->word_arr[i].blank == 1) {
-      strcat(printStr, chooseWord(template->word_arr[i].word, NULL));
-    }
-    else {
-      strcat(printStr, template->word_arr[i].word);
-    }
-    strcat(printStr, " ");
-  }
-  printStr[strlen(printStr) - 1] = '.';
-  fprintf(stdout, "%s\n", printStr);
-  for (size_t j = 0; j < template->word_sz; j++) {
-    free(template->word_arr[j].word);
-  }
-  free(template->word_arr);
-  free(template);
+  char * story = parseTemplate(f);
+
+  printf("%s\n", story);
+  free(story);
   if (fclose(f) != 0) {
     perror("Failed to close the input file. \n");
     exit(EXIT_FAILURE);

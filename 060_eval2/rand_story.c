@@ -3,7 +3,58 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+char * parseLine(char * line) {
+  char * head = line;
+  char *start, *end;
+  char word[50];
+  char buffer[strlen(line)];
+  char res[3 * strlen(line)];
+  *res = '\0';
+  start = strchr(head, '_');
+  while (start != NULL) {
+    end = strchr(start + 1, '_');
+    if (end == NULL) {
+      perror("No mataching underscore.\n");
+      exit(EXIT_FAILURE);
+    }
+    strncpy(buffer, head, start - head);
+    buffer[start - head] = '\0';  //non-terminated
+    strncpy(word, start + 1, end - start - 1);
+    word[end - start - 1] = '\0';
+    strcat(buffer, chooseWord(word, NULL));
+    strcat(res, buffer);
+    // *buffer = '\0';
+    head = end + 1;
+    start = strchr(head, '_');
+  }
+  char * ptr = head;
+  while (*ptr != '\0' && *ptr != '\n') {
+    ptr++;
+  }
+  *ptr = '\0';
+  strcat(res, head);
+  char * str = strdup(res);
+  return str;
+}
 
+char * parseTemplate(FILE * f) {
+  char * curr = NULL;
+  size_t sz;
+  char * temp;
+  char str[1000];
+  *str = '\0';
+  while (getline(&curr, &sz, f) >= 0) {
+    temp = parseLine(curr);
+    strcat(str, temp);
+    free(curr);
+    free(temp);
+    curr = NULL;
+  }
+  char * story = strdup(str);
+  return story;
+}
+
+/*
 template_t * parseTemplate(FILE * f) {
   char * curr = NULL;
   size_t sz;
@@ -45,6 +96,7 @@ template_t * parseTemplate(FILE * f) {
   free(curr);
   return template;
 }
+*/
 
 /*
 template_t * parseTemplate(FILE * f) {

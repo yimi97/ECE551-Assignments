@@ -8,6 +8,10 @@
 #include "provided.h"
 
 //any functions you want your main to use
+
+char * parseTemplate(FILE * f);
+char * parseLine(char * line);
+
 struct word_tag {
   char * word;
   int blank;
@@ -25,5 +29,6 @@ struct template_tag {
 
 typedef struct template_tag template_t;
 
-template_t * parseTemplate(FILE * f);
+//template_t * parseTemplate(FILE * f);
+
 #endif
