@@ -37,21 +37,26 @@ char * parseLine(char * line) {
   return str;
 }
 
-char * parseTemplate(FILE * f) {
+void parseTemplate(FILE * f) {
   char * curr = NULL;
   size_t sz;
+  //  size_t i = 0;
   char * temp;
-  char str[1000];
-  *str = '\0';
+  //  char * story;
+  //  char str[1000];
+  // *str = '\0';
   while (getline(&curr, &sz, f) >= 0) {
     temp = parseLine(curr);
-    strcat(str, temp);
+    printf("%s\n", temp);
+    //    strcat(str, temp);
+    //story = malloc((i + 1) * sizeof(*story));
+    //story[i] = temp;
     free(curr);
     free(temp);
     curr = NULL;
   }
-  char * story = strdup(str);
-  return story;
+  //char * story = strdup(str);
+  //return story;
 }
 
 /*

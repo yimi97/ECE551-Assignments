@@ -14,10 +14,10 @@ int main(int argc, char ** argv) {
   }
 
   // DO STH
-  char * story = parseTemplate(f);
-
-  printf("%s\n", story);
-  free(story);
+  // char ** story = parseTemplate(f);
+  parseTemplate(f);
+  //printf("%s\n", story);
+  //free(story);
   if (fclose(f) != 0) {
     perror("Failed to close the input file. \n");
     exit(EXIT_FAILURE);

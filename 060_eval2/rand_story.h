@@ -8,8 +8,8 @@
 #include "provided.h"
 
 //any functions you want your main to use
-
-char * parseTemplate(FILE * f);
+void parseTemplate(FILE * f);
+//char * parseTemplate(FILE * f);
 char * parseLine(char * line);
 
 struct word_tag {
