@@ -27,11 +27,13 @@ char * parseLine(char * line) {
     head = end + 1;
     start = strchr(head, '_');
   }
+  /*
   char * ptr = head;
   while (*ptr != '\0' && *ptr != '\n') {
     ptr++;
   }
   *ptr = '\0';
+  */
   strcat(res, head);
   char * str = strdup(res);
   return str;
@@ -47,7 +49,7 @@ void parseTemplate(FILE * f) {
   // *str = '\0';
   while (getline(&curr, &sz, f) >= 0) {
     temp = parseLine(curr);
-    printf("%s\n", temp);
+    printf("%s", temp);
     //    strcat(str, temp);
     //story = malloc((i + 1) * sizeof(*story));
     //story[i] = temp;
@@ -55,6 +57,7 @@ void parseTemplate(FILE * f) {
     free(temp);
     curr = NULL;
   }
+  free(curr);
   //char * story = strdup(str);
   //return story;
 }
