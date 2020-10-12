@@ -4,6 +4,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+/*
+int pre = atoi(word);
+if (pre > 0){findRef}
+else {cw=chooseWord(), addRef}
+*/
+
 void addWord(catarray_t * catarray, char * curr) {
   char * colon = strchr(curr, ':');
   if (colon == NULL) {
@@ -74,13 +80,7 @@ char * parseLine(char * line, catarray_t * cats) {
     buffer[start - head] = '\0';  //non-terminated
     strncpy(word, start + 1, end - start - 1);
     word[end - start - 1] = '\0';
-    int pre = atoi(word);
-    if (pre > 0) {
-      //      strcat(buffer, findPre(pre, ref));  //
-    }
-    else {
-      strcat(buffer, chooseWord(word, cats));  // do wee need to free chooseword?
-    }
+    strcat(buffer, chooseWord(word, cats));  // do wee need to free chooseword? why not?
     strcat(res, buffer);
     head = end + 1;
     start = strchr(head, '_');
