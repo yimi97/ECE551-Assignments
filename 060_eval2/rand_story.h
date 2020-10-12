@@ -7,7 +7,10 @@
 
 #include "provided.h"
 
-//any functions you want your main to use
+// Step 2
+catarray_t * parseWord(FILE * f);
+
+// Step1
 void parseTemplate(FILE * f);
 //char * parseTemplate(FILE * f);
 char * parseLine(char * line);
