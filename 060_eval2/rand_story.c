@@ -41,7 +41,7 @@ void freeCatarray(catarray_t * c) {
 void addWord(FILE * f, catarray_t * catarray, char * curr) {
   char * colon = strchr(curr, ':');
   if (colon == NULL) {
-    printf("No colon.\n");
+    fprintf(stderr, "No colon.\n");
     free(curr);
     freeCatarray(catarray);
     fclose(f);
@@ -122,7 +122,7 @@ char * parseLine(FILE * f, char * line, catarray_t * cats) {
   while (start != NULL) {  // keep finding underSocre
     end = strchr(start + 1, '_');
     if (end == NULL) {
-      printf("No mataching underscore.\n");
+      fprintf(stderr, "No mataching underscore.\n");
       free(line);
       fclose(f);
       exit(EXIT_FAILURE);
