@@ -1,6 +1,6 @@
-Grading at 10/11/2020:23:53:20.280244
-For commit ID 23129b06bb96207a103fda88100bc9b4ff167e6a
-Grading at Sun Oct 11 19:53:20 EDT 2020
+Grading at 10/12/2020:01:42:10.251288
+For commit ID 7d0373c9fd75ff5563768dda3263c82cfc67ee11
+Grading at Sun Oct 11 21:42:09 EDT 2020
 Doing some basic sanity checking for your submission
 
 Step 1
@@ -17,6 +17,18 @@ Your file matched the expected output
 
 Step 2
 Checking that story-step2 compiles
+rm -f *~ story-step1 story-step2 story-step3 story-step4 story-step1.o story-step2.o story-step3.o story-step4.o rand_story.o
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c rand_story.c
+gcc -std=gnu99 -pedantic -Wall -Werror -ggdb3 -c story-step2.c
+gcc -o story-step2 story-step2.o rand_story.o provided.o
+rm story-step2.o
+The code compiled (good)
+Executable story-step2 exists (good)
+Checking with provided test case words.txt
+Your file matched the expected output
+
+Step 3
+Checking that story-step3 compiles
 rm -f *~ story-step1 story-step2 story-step3 story-step4 story-step1.o story-step2.o story-step3.o story-step4.o rand_story.o
 The code did not compile!
 
