@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 int main(void) {
+  /*
   char * str = "_ABC_ abc abc _qwe_.";
   char buffer[100];
   strncpy(buffer, str, 0);
@@ -14,5 +15,9 @@ int main(void) {
   char * res = "";
   strcat(res, buffer);
   printf("%s\n", res);
+  */
+  char * s = "abs";
+  int x = atoi(s);
+  printf("%d", x);
   return EXIT_SUCCESS;
 }
