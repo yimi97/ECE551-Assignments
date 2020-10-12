@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* ======================================== Step 3 ========================================= */
+
 /*
 int pre = atoi(word);
 if (pre > 0){findRef}
