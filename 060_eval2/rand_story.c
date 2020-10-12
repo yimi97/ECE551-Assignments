@@ -10,21 +10,29 @@ if (pre > 0){findRef}
 else {cw=chooseWord(), addRef}
 */
 
+/*
+ *@a function used to parse and store each line from word input file.  
+ *@param catarray : A pointer pointing to a cataray_t created before. 
+ *@param curr : A pointer pointing to each line from getline().
+ *@return void.
+*/
 void addWord(catarray_t * catarray, char * curr) {
   char * colon = strchr(curr, ':');
   if (colon == NULL) {
-    fprintf(stderr, "No colon.\n");
+    printf("No colon.\n");
     exit(EXIT_FAILURE);
   }
   char * cat = strndup(curr, colon - curr);
   char * w = strndup(colon + 1, strlen(curr) - (colon - curr + 1));
   char * ptr = w;
+  // remove '\n'
   while (*ptr != '\0' && *ptr != '\n') {
     ptr++;
   }
   *ptr = '\0';
-  int exist = 0;
+  int exist = 0;  // used to check if the newly parsed cat is already stored before
   for (size_t i = 0; i < catarray->n; i++) {
+    // if the cat is inside our array, store the word into its struct
     if (strcmp(catarray->arr[i].name, cat) == 0) {
       free(cat);
       exist = 1;
@@ -36,6 +44,7 @@ void addWord(catarray_t * catarray, char * curr) {
       break;
     }
   }
+  // if not, create a new category struct, store cat and word, resize arr
   if (exist == 0) {
     catarray->n += 1;
     catarray->arr = realloc(catarray->arr, (catarray->n) * sizeof(*catarray->arr));
@@ -48,6 +57,11 @@ void addWord(catarray_t * catarray, char * curr) {
   free(curr);
 }
 
+/*
+ *@a function used to read word input file and add words.  
+ *@param f : A word input file containing cat:word lines. 
+ *@return catarray_t.
+*/
 catarray_t * parseWord(FILE * f) {
   char * curr = NULL;
   size_t sz;
@@ -55,6 +69,7 @@ catarray_t * parseWord(FILE * f) {
   catarray->arr = NULL;
   catarray->n = 0;
   while (getline(&curr, &sz, f) >= 0) {
+    // parse and add words to catarray
     addWord(catarray, curr);
     curr = NULL;
   }
@@ -62,22 +77,28 @@ catarray_t * parseWord(FILE * f) {
   return catarray;
 }
 
+/*
+ *@a function used to parse each line from story template file.  
+ *@param line : A pointer pointing to a each line from getline() inside parseTemplate. 
+ *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
+ *@return char* : A pointer pointing to the line parsed.
+*/
 char * parseLine(char * line, catarray_t * cats) {
   char * head = line;
-  char *start, *end;
-  char word[50];
-  char buffer[strlen(line)];
-  char res[3 * strlen(line)];
+  char *start, *end;           // start underscore and end undersocre
+  char word[50];               // a buffer used to store a replaced word
+  char buffer[strlen(line)];   // a buffer used to store a slicing str from head to start
+  char res[3 * strlen(line)];  // a buffer to store the result
   *res = '\0';
   start = strchr(head, '_');
-  while (start != NULL) {
+  while (start != NULL) {  // keep finding underSocre
     end = strchr(start + 1, '_');
     if (end == NULL) {
-      perror("No mataching underscore.\n");
+      printf("No mataching underscore.\n");
       exit(EXIT_FAILURE);
     }
     strncpy(buffer, head, start - head);
-    buffer[start - head] = '\0';  //non-terminated
+    buffer[start - head] = '\0';  // strncpy is not null-terminated
     strncpy(word, start + 1, end - start - 1);
     word[end - start - 1] = '\0';
     strcat(buffer, chooseWord(word, cats));  // do wee need to free chooseword? why not?
@@ -85,11 +106,18 @@ char * parseLine(char * line, catarray_t * cats) {
     head = end + 1;
     start = strchr(head, '_');
   }
+  // concatenate the rest part to the result
   strcat(res, head);
   char * str = strdup(res);
   return str;
 }
 
+/*
+ *@a function used to read and parse a story template file.  
+ *@param f : A story template file. 
+ *@param cats : A pointer pointing to a catarray_t struct storing cat and words.
+ *@return void.
+*/
 void parseTemplate(FILE * f, catarray_t * cats) {
   char * curr = NULL;
   size_t sz;
