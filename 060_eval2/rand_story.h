@@ -16,23 +16,4 @@ catarray_t * parseWord(FILE * f);
 void parseTemplate(FILE * f, catarray_t * cats);
 void parseLine(FILE * f, char * line, catarray_t * cats);
 
-struct word_tag {
-  char * word;
-  int blank;
-};
-
-typedef struct word_tag word_t;
-
-struct template_tag {
-  word_t * word_arr;
-  //  char ** word_arr;
-  //  size_t * blank_arr;
-  size_t word_sz;
-  //  size_t blank_sz;
-};
-
-typedef struct template_tag template_t;
-
-//template_t * parseTemplate(FILE * f);
-
 #endif

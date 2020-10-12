@@ -12,18 +12,8 @@ int main(int argc, char ** argv) {
 
   catarray_t * c = parseWord(f);
   printWords(c);
-  /*
-  for (size_t i = 0; i < c->n; i++) {
-    free(c->arr[i].name);
-    for (size_t j = 0; j < c->arr[i].n_words; j++) {
-      free(c->arr[i].words[j]);
-    }
-    free(c->arr[i].words);
-  }
-  free(c->arr);
-  free(c);
-  */
   freeCatarray(c);
+
   if (fclose(f) != 0) {
     perror("Failed to close the file.\n");
     exit(EXIT_FAILURE);
