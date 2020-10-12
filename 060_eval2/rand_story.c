@@ -41,7 +41,7 @@ void freeCatarray(catarray_t * c) {
 void addWord(FILE * f, catarray_t * catarray, char * curr) {
   char * colon = strchr(curr, ':');
   if (colon == NULL) {
-    fprintf(stderr, "No colon.\n");
+    fprintf(stderr, "ERROR: No colon.\n");
     free(curr);
     freeCatarray(catarray);
     fclose(f);
@@ -118,7 +118,6 @@ void parseLine(FILE * f, char * line, catarray_t * cats) {
     if (*ptr == '_') {
       second = strchr(ptr + 1, '_');
       if (second == NULL) {
-        //free
         free(line);
         fclose(f);
         fprintf(stderr, "ERROR: No mathing underscore in template.\n");

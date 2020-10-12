@@ -1,4 +1,4 @@
-animal
+animal:
 animal:dragon
 animal:walrus
 place:cave
