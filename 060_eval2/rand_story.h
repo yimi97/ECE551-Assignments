@@ -14,7 +14,7 @@ catarray_t * parseWord(FILE * f);
 
 // Step1
 void parseTemplate(FILE * f, catarray_t * cats);
-char * parseLine(FILE * f, char * line, catarray_t * cats);
+void parseLine(FILE * f, char * line, catarray_t * cats);
 
 struct word_tag {
   char * word;

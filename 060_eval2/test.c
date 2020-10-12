@@ -19,5 +19,7 @@ int main(void) {
   char * s = "abs";
   int x = atoi(s);
   printf("%d", x);
+  size_t i = 2;
+  printf("%ld", i);
   return EXIT_SUCCESS;
 }

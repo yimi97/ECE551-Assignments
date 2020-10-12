@@ -105,41 +105,38 @@ catarray_t * parseWord(FILE * f) {
 /* ======================================== Step 1 ========================================= */
 
 /*
- *@a function used to parse each line from story template file.  
+ *@a function used to parse each line from story template file and print.  
  *@param f: The file read, in case we have to close it.
  *@param line : A pointer pointing to a each line from getline() inside parseTemplate. 
  *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
- *@return char* : A pointer pointing to the line parsed.
+ *@return void.
 */
-char * parseLine(FILE * f, char * line, catarray_t * cats) {
-  char * head = line;
-  char *start, *end;           // start underscore and end undersocre
-  char word[50];               // a buffer used to store a replaced word
-  char buffer[strlen(line)];   // a buffer used to store a slicing str from head to start
-  char res[3 * strlen(line)];  // a buffer to store the result
-  *res = '\0';
-  start = strchr(head, '_');
-  while (start != NULL) {  // keep finding underSocre
-    end = strchr(start + 1, '_');
-    if (end == NULL) {
-      fprintf(stderr, "No mataching underscore.\n");
-      free(line);
-      fclose(f);
-      exit(EXIT_FAILURE);
+void parseLine(FILE * f, char * line, catarray_t * cats) {
+  char * ptr = line;
+  char * second;
+  while (*ptr != '\0') {
+    if (*ptr == '_') {
+      second = strchr(ptr + 1, '_');
+      if (second == NULL) {
+        //free
+        free(line);
+        fclose(f);
+        fprintf(stderr, "ERROR: No mathing underscore in template.\n");
+        exit(EXIT_FAILURE);
+      }
+      char newWord[second - ptr];
+      for (size_t i = 0; i < second - ptr - 1; i++) {
+        newWord[i] = ptr[1];
+      }
+      newWord[second - ptr - 1] = '\0';
+      fprintf(stdout, "%s", chooseWord(newWord, cats));
+      ptr = second + 1;
     }
-    strncpy(buffer, head, start - head);
-    buffer[start - head] = '\0';  // strncpy is not null-terminated
-    strncpy(word, start + 1, end - start - 1);
-    word[end - start - 1] = '\0';
-    strcat(buffer, chooseWord(word, cats));  // do wee need to free chooseword? why not?
-    strcat(res, buffer);
-    head = end + 1;
-    start = strchr(head, '_');
+    else {
+      fprintf(stdout, "%c", *ptr);
+      ptr++;
+    }
   }
-  // concatenate the rest part to the result
-  strcat(res, head);
-  char * str = strdup(res);
-  return str;
 }
 
 /*
@@ -151,12 +148,9 @@ char * parseLine(FILE * f, char * line, catarray_t * cats) {
 void parseTemplate(FILE * f, catarray_t * cats) {
   char * curr = NULL;
   size_t sz;
-  char * temp;
   while (getline(&curr, &sz, f) >= 0) {
-    temp = parseLine(f, curr, cats);
-    printf("%s", temp);
+    parseLine(f, curr, cats);
     free(curr);
-    free(temp);
     curr = NULL;
   }
   free(curr);
