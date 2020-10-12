@@ -10,16 +10,39 @@ if (pre > 0){findRef}
 else {cw=chooseWord(), addRef}
 */
 
+/* ======================================== Step 2 ========================================= */
+
+/*
+ *@a function used to free a catarray_t struct.  
+ *@param c: The struct going to be freed.
+ *@return void.
+*/
+void freeCatarray(catarray_t * c) {
+  for (size_t i = 0; i < c->n; i++) {
+    free(c->arr[i].name);
+    for (size_t j = 0; j < c->arr[i].n_words; j++) {
+      free(c->arr[i].words[j]);
+    }
+    free(c->arr[i].words);
+  }
+  free(c->arr);
+  free(c);
+}
+
 /*
  *@a function used to parse and store each line from word input file.  
+ *@param f: The file read, in case we have to close it.
  *@param catarray : A pointer pointing to a cataray_t created before. 
  *@param curr : A pointer pointing to each line from getline().
  *@return void.
 */
-void addWord(catarray_t * catarray, char * curr) {
+void addWord(FILE * f, catarray_t * catarray, char * curr) {
   char * colon = strchr(curr, ':');
   if (colon == NULL) {
     printf("No colon.\n");
+    free(curr);
+    freeCatarray(catarray);
+    fclose(f);
     exit(EXIT_FAILURE);
   }
   char * cat = strndup(curr, colon - curr);
@@ -70,20 +93,23 @@ catarray_t * parseWord(FILE * f) {
   catarray->n = 0;
   while (getline(&curr, &sz, f) >= 0) {
     // parse and add words to catarray
-    addWord(catarray, curr);
+    addWord(f, catarray, curr);
     curr = NULL;
   }
   free(curr);
   return catarray;
 }
 
+/* ======================================== Step 1 ========================================= */
+
 /*
  *@a function used to parse each line from story template file.  
+ *@param f: The file read, in case we have to close it.
  *@param line : A pointer pointing to a each line from getline() inside parseTemplate. 
  *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
  *@return char* : A pointer pointing to the line parsed.
 */
-char * parseLine(char * line, catarray_t * cats) {
+char * parseLine(FILE * f, char * line, catarray_t * cats) {
   char * head = line;
   char *start, *end;           // start underscore and end undersocre
   char word[50];               // a buffer used to store a replaced word
@@ -95,6 +121,8 @@ char * parseLine(char * line, catarray_t * cats) {
     end = strchr(start + 1, '_');
     if (end == NULL) {
       printf("No mataching underscore.\n");
+      free(line);
+      fclose(f);
       exit(EXIT_FAILURE);
     }
     strncpy(buffer, head, start - head);
@@ -123,7 +151,7 @@ void parseTemplate(FILE * f, catarray_t * cats) {
   size_t sz;
   char * temp;
   while (getline(&curr, &sz, f) >= 0) {
-    temp = parseLine(curr, cats);
+    temp = parseLine(f, curr, cats);
     printf("%s", temp);
     free(curr);
     free(temp);
