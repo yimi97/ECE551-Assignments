@@ -5,12 +5,38 @@
 #include <string.h>
 
 /* ======================================== Step 3 ========================================= */
+int checkExist(char * word, catarray_t * c) {
+  for (size_t i = 0; i < c->n; i++) {
+    if (strcmp(c->arr[i].name, word) == 0) {
+      return 1;
+    }
+  }
+  return 0;
+}
 
-/*
-int pre = atoi(word);
-if (pre > 0){findRef}
-else {cw=chooseWord(), addRef}
-*/
+void addRef(const char * word, category_t * cat) {
+  cat->n_words += 1;
+  cat->words = realloc(cat->words, cat->n_words * sizeof(*cat->words));
+  cat->words[cat->n_words - 1] = strdup(word);
+}
+
+void freeCategory(category_t * c) {
+  if (c == NULL) {
+    return;
+  }
+  for (size_t i = 0; i < c->n_words; i++) {
+    free(c->words[i]);
+  }
+  free(c->words);
+  free(c);
+}
+
+void freeAll(char * line, FILE * f, catarray_t * cats, category_t * wordRef) {
+  free(line);
+  fclose(f);
+  freeCatarray(cats);
+  freeCategory(wordRef);
+}
 
 /* ======================================== Step 2 ========================================= */
 
@@ -20,6 +46,9 @@ else {cw=chooseWord(), addRef}
  *@return void.
 */
 void freeCatarray(catarray_t * c) {
+  if (c == NULL) {
+    return;
+  }
   for (size_t i = 0; i < c->n; i++) {
     free(c->arr[i].name);
     for (size_t j = 0; j < c->arr[i].n_words; j++) {
@@ -111,24 +140,53 @@ catarray_t * parseWord(FILE * f) {
  *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
  *@return void.
 */
-void parseLine(FILE * f, char * line, catarray_t * cats) {
+void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
   char * ptr = line;
   char * second;
   while (*ptr != '\0') {
     if (*ptr == '_') {
       second = strchr(ptr + 1, '_');
       if (second == NULL) {
-        free(line);
-        fclose(f);
         fprintf(stderr, "ERROR: No mathing underscore in template.\n");
+        freeAll(line, f, cats, wordRef);
         exit(EXIT_FAILURE);
       }
       char newWord[second - ptr];
       for (size_t i = 0; i < second - ptr - 1; i++) {
-        newWord[i] = ptr[1];
+        newWord[i] = ptr[i + 1];
       }
       newWord[second - ptr - 1] = '\0';
-      fprintf(stdout, "%s", chooseWord(newWord, cats));
+
+      //      printf("%s\n", newWord);
+      int num = atoi(newWord);
+      if (cats == NULL) {  // step1
+        fprintf(stdout, "%s", chooseWord(newWord, NULL));
+      }
+      else {            // step3
+        if (num > 0) {  // integer: replace word using word reference
+          if (num > wordRef->n_words) {
+            fprintf(stderr, "ERROR: [%d] out of range.\n", num);
+            freeAll(line, f, cats, wordRef);
+            exit(EXIT_FAILURE);
+          }
+          char * replace = wordRef->words[wordRef->n_words - num];
+          fprintf(stdout, "%s", replace);
+          addRef(replace, wordRef);
+        }
+        else {  // category: replace word using chooseWord()
+          if (checkExist(newWord, cats) == 1) {  // if exit word
+            const char * replace = chooseWord(newWord, cats);
+            fprintf(stdout, "%s", replace);
+            addRef(replace, wordRef);
+          }
+          else {
+            fprintf(stderr, "ERROR: [%s] is not an integer or category.\n", newWord);
+            freeAll(line, f, cats, wordRef);
+            exit(EXIT_FAILURE);
+          }
+        }
+      }
+      // fprintf(stdout, "%s", chooseWord(newWord, cats)); // step1 init
       ptr = second + 1;
     }
     else {
@@ -147,10 +205,16 @@ void parseLine(FILE * f, char * line, catarray_t * cats) {
 void parseTemplate(FILE * f, catarray_t * cats) {
   char * curr = NULL;
   size_t sz;
+  //
+  category_t * wordRef = malloc(sizeof(*wordRef));
+  wordRef->n_words = 0;
+  wordRef->words = NULL;
+  //
   while (getline(&curr, &sz, f) >= 0) {
-    parseLine(f, curr, cats);
+    parseLine(f, curr, cats, wordRef);
     free(curr);
     curr = NULL;
   }
   free(curr);
+  freeCategory(wordRef);
 }

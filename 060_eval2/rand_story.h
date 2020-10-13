@@ -14,6 +14,6 @@ catarray_t * parseWord(FILE * f);
 
 // Step1
 void parseTemplate(FILE * f, catarray_t * cats);
-void parseLine(FILE * f, char * line, catarray_t * cats);
+void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef);
 
 #endif
