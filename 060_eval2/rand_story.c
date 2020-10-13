@@ -5,6 +5,37 @@
 #include <string.h>
 
 /* ======================================== Step 3 ========================================= */
+
+void replaceWord(char * newWord,
+                 FILE * f,
+                 char * line,
+                 catarray_t * cats,
+                 category_t * wordRef) {
+  int num = atoi(newWord);
+  if (num > 0) {  // integer: replace word using word reference
+    if (num > wordRef->n_words) {
+      fprintf(stderr, "ERROR: [%d] is out of range.\n", num);
+      freeAll(line, f, cats, wordRef);
+      exit(EXIT_FAILURE);
+    }
+    char * replace = wordRef->words[wordRef->n_words - num];
+    fprintf(stdout, "%s", replace);
+    addRef(replace, wordRef);
+  }
+  else {                                   // category: replace word using chooseWord()
+    if (checkExist(newWord, cats) == 1) {  // if exit word
+      const char * replace = chooseWord(newWord, cats);
+      fprintf(stdout, "%s", replace);
+      addRef(replace, wordRef);
+    }
+    else {
+      fprintf(stderr, "ERROR: [%s] is not an integer or category.\n", newWord);
+      freeAll(line, f, cats, wordRef);
+      exit(EXIT_FAILURE);
+    }
+  }
+}
+
 int checkExist(char * word, catarray_t * c) {
   for (size_t i = 0; i < c->n; i++) {
     if (strcmp(c->arr[i].name, word) == 0) {
@@ -138,6 +169,7 @@ catarray_t * parseWord(FILE * f) {
  *@param f: The file read, in case we have to close it.
  *@param line : A pointer pointing to a each line from getline() inside parseTemplate. 
  *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
+ *@param wordRef: A pointer pointing to a category_t sturct, storing words used.
  *@return void.
 */
 void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
@@ -157,36 +189,12 @@ void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
       }
       newWord[second - ptr - 1] = '\0';
 
-      //      printf("%s\n", newWord);
-      int num = atoi(newWord);
       if (cats == NULL) {  // step1
         fprintf(stdout, "%s", chooseWord(newWord, NULL));
       }
-      else {            // step3
-        if (num > 0) {  // integer: replace word using word reference
-          if (num > wordRef->n_words) {
-            fprintf(stderr, "ERROR: [%d] out of range.\n", num);
-            freeAll(line, f, cats, wordRef);
-            exit(EXIT_FAILURE);
-          }
-          char * replace = wordRef->words[wordRef->n_words - num];
-          fprintf(stdout, "%s", replace);
-          addRef(replace, wordRef);
-        }
-        else {  // category: replace word using chooseWord()
-          if (checkExist(newWord, cats) == 1) {  // if exit word
-            const char * replace = chooseWord(newWord, cats);
-            fprintf(stdout, "%s", replace);
-            addRef(replace, wordRef);
-          }
-          else {
-            fprintf(stderr, "ERROR: [%s] is not an integer or category.\n", newWord);
-            freeAll(line, f, cats, wordRef);
-            exit(EXIT_FAILURE);
-          }
-        }
+      else {  // step3
+        replaceWord(newWord, f, line, cats, wordRef);
       }
-      // fprintf(stdout, "%s", chooseWord(newWord, cats)); // step1 init
       ptr = second + 1;
     }
     else {
@@ -205,11 +213,10 @@ void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
 void parseTemplate(FILE * f, catarray_t * cats) {
   char * curr = NULL;
   size_t sz;
-  //
+  // init a word reference to store the words usef previously
   category_t * wordRef = malloc(sizeof(*wordRef));
   wordRef->n_words = 0;
   wordRef->words = NULL;
-  //
   while (getline(&curr, &sz, f) >= 0) {
     parseLine(f, curr, cats, wordRef);
     free(curr);

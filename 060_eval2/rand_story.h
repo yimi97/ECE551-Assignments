@@ -7,6 +7,17 @@
 
 #include "provided.h"
 
+// Step 3
+void replaceWord(char * newWord,
+                 FILE * f,
+                 char * line,
+                 catarray_t * cats,
+                 category_t * wordRef);
+int checkExist(char * word, catarray_t * c);
+void addRef(const char * word, category_t * cat);
+void freeCategory(category_t * c);
+void freeAll(char * line, FILE * f, catarray_t * cats, category_t * wordRef);
+
 // Step 2
 void freeCatarray(catarray_t * c);
 void addWord(FILE * f, catarray_t * catarray, char * curr);
