@@ -6,6 +6,13 @@
 
 /* ======================================== Step 4 ========================================= */
 
+/*
+ *@a function used to remove the word used from catarray_t. 
+ *@param cats: A pointer pointing to the catarray_t struct.
+ *@param newWord: A pointer pointing to the replaced word string.
+ *@param replace: A pointer pointing to the replacing word string.
+ *@return void.
+*/
 void removeWord(catarray_t * cats, char * newWord, const char * replace) {
   for (size_t i = 0; i < cats->n; i++) {
     // find category name
@@ -33,6 +40,16 @@ void removeWord(catarray_t * cats, char * newWord, const char * replace) {
 
 /* ======================================== Step 3 ========================================= */
 
+/*
+ *@a function used to replace the blanks with words. 
+ *@param newWord: A pointer pointing to the word string waiting to be replaces.
+ *@param f: A pointer pointing to the file need to be closed.
+ *@param line: A pointer pointing to the line read by getline().
+ *@param cats: A pointer pointing to the catarray_t struct.
+ *@param wordRef: A pointer pointing to the category_t struct used to record word reference.
+ *@param noUsed: A int used to check if we can use the used words.
+ *@return void.
+*/
 void replaceWord(char * newWord,
                  FILE * f,
                  char * line,
@@ -67,6 +84,12 @@ void replaceWord(char * newWord,
   }
 }
 
+/*
+ *@a function used to check if the word inside the catarray. 
+ *@param word: A pointer pointing to the word string.
+ *@param cats: A pointer pointing to the catarray_t struct.
+ *@return int: if exists return 1, otherwise return 0.
+*/
 int checkExist(char * word, catarray_t * c) {
   for (size_t i = 0; i < c->n; i++) {
     if (strcmp(c->arr[i].name, word) == 0 && c->arr[i].n_words > 0) {
@@ -76,12 +99,22 @@ int checkExist(char * word, catarray_t * c) {
   return 0;
 }
 
+/*
+ *@a function used to add the word into word reference.  
+ *@param word: A pointer pointing to the word string.
+ *@param cats: A pointer pointing to the category_t struct.
+ *@return void.
+*/
 void addRef(const char * word, category_t * cat) {
   cat->n_words += 1;
   cat->words = realloc(cat->words, cat->n_words * sizeof(*cat->words));
   cat->words[cat->n_words - 1] = strdup(word);
 }
-
+/*
+ *@a function used to free a category_t struct.
+ *@param cats: A pointer pointing to the category_t struct.
+ *@return void.
+*/
 void freeCategory(category_t * c) {
   if (c == NULL) {
     return;
@@ -96,6 +129,14 @@ void freeCategory(category_t * c) {
   free(c);
 }
 
+/*
+ *@a function used to free several kinds of memory blocks while encountering an error.  
+ *@param line: A pointer pointing to the line read by getline().
+ *@param f: A pointer pointing to the file need to be closed.
+ *@param cats: A pointer pointing to the catarray_t struct.
+ *@param wordRef: A pointer pointing to the category_t struct used to record word reference.
+ *@return void.
+*/
 void freeAll(char * line, FILE * f, catarray_t * cats, category_t * wordRef) {
   free(line);
   fclose(f);
@@ -204,6 +245,7 @@ catarray_t * parseWord(FILE * f) {
  *@param line : A pointer pointing to a each line from getline() inside parseTemplate. 
  *@param cat : A pointer pointing to a catarray_t struct storing cat and words.
  *@param wordRef: A pointer pointing to a category_t sturct, storing words used.
+ *@param noUsed: An integer used to check if we can use the used words.
  *@return void.
 */
 void parseLine(FILE * f,
@@ -246,6 +288,7 @@ void parseLine(FILE * f,
  *@a function used to read and parse a story template file.  
  *@param f : A story template file. 
  *@param cats : A pointer pointing to a catarray_t struct storing cat and words.
+ *@param noUsed: An integer used to check if we can use the used words.
  *@return void.
 */
 void parseTemplate(FILE * f, catarray_t * cats, int noUsed) {

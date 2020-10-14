@@ -6,6 +6,8 @@
 #include <string.h>
 
 #include "provided.h"
+// Step 4
+void removeWord(catarray_t * cats, char * newWord, const char * replace);
 
 // Step 3
 void replaceWord(char * newWord,
