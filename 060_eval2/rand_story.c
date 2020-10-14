@@ -72,7 +72,7 @@ void replaceWord(char * newWord,
       const char * replace = chooseWord(newWord, cats);
       fprintf(stdout, "%s", replace);
       addRef(replace, wordRef);
-      if (noUsed == 1) {
+      if (noUsed == 1) {  // step4
         removeWord(cats, newWord, replace);
       }
     }
@@ -110,6 +110,7 @@ void addRef(const char * word, category_t * cat) {
   cat->words = realloc(cat->words, cat->n_words * sizeof(*cat->words));
   cat->words[cat->n_words - 1] = strdup(word);
 }
+
 /*
  *@a function used to free a category_t struct.
  *@param cats: A pointer pointing to the category_t struct.
