@@ -4,13 +4,41 @@
 #include <stdlib.h>
 #include <string.h>
 
+/* ======================================== Step 4 ========================================= */
+
+void removeWord(catarray_t * cats, char * newWord, const char * replace) {
+  for (size_t i = 0; i < cats->n; i++) {
+    // find category name
+    if (strcmp(cats->arr[i].name, newWord) == 0) {
+      for (size_t j = 0; j < cats->arr[i].n_words; j++) {
+        // find replaced word
+        if (strcmp(cats->arr[i].words[j], replace) == 0) {
+          free(cats->arr[i].words[j]);
+          for (size_t k = j; k < cats->arr[i].n_words - 1; k++) {
+            cats->arr[i].words[k] = cats->arr[i].words[k + 1];
+          }
+          cats->arr[i].n_words -= 1;
+          // if no words exists in this category
+          // if (cats->arr[i].n_words == 0) {
+          // printf("no words!!!\n");
+          //}
+          cats->arr[i].words = realloc(
+              cats->arr[i].words, cats->arr[i].n_words * sizeof(*cats->arr[i].words));
+          return;
+        }
+      }
+    }
+  }
+}
+
 /* ======================================== Step 3 ========================================= */
 
 void replaceWord(char * newWord,
                  FILE * f,
                  char * line,
                  catarray_t * cats,
-                 category_t * wordRef) {
+                 category_t * wordRef,
+                 int noUsed) {
   int num = atoi(newWord);
   if (num > 0) {  // integer: replace word using word reference
     if (num > wordRef->n_words) {
@@ -23,10 +51,13 @@ void replaceWord(char * newWord,
     addRef(replace, wordRef);
   }
   else {                                   // category: replace word using chooseWord()
-    if (checkExist(newWord, cats) == 1) {  // if exit word
+    if (checkExist(newWord, cats) == 1) {  // if word exists
       const char * replace = chooseWord(newWord, cats);
       fprintf(stdout, "%s", replace);
       addRef(replace, wordRef);
+      if (noUsed == 1) {
+        removeWord(cats, newWord, replace);
+      }
     }
     else {
       fprintf(stderr, "ERROR: [%s] is not an integer or category.\n", newWord);
@@ -38,7 +69,7 @@ void replaceWord(char * newWord,
 
 int checkExist(char * word, catarray_t * c) {
   for (size_t i = 0; i < c->n; i++) {
-    if (strcmp(c->arr[i].name, word) == 0) {
+    if (strcmp(c->arr[i].name, word) == 0 && c->arr[i].n_words > 0) {
       return 1;
     }
   }
@@ -54,6 +85,9 @@ void addRef(const char * word, category_t * cat) {
 void freeCategory(category_t * c) {
   if (c == NULL) {
     return;
+  }
+  if (c->name != NULL) {
+    free(c->name);
   }
   for (size_t i = 0; i < c->n_words; i++) {
     free(c->words[i]);
@@ -172,7 +206,11 @@ catarray_t * parseWord(FILE * f) {
  *@param wordRef: A pointer pointing to a category_t sturct, storing words used.
  *@return void.
 */
-void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
+void parseLine(FILE * f,
+               char * line,
+               catarray_t * cats,
+               category_t * wordRef,
+               int noUsed) {
   char * ptr = line;
   char * second;
   while (*ptr != '\0') {
@@ -193,7 +231,7 @@ void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
         fprintf(stdout, "%s", chooseWord(newWord, NULL));
       }
       else {  // step3
-        replaceWord(newWord, f, line, cats, wordRef);
+        replaceWord(newWord, f, line, cats, wordRef, noUsed);
       }
       ptr = second + 1;
     }
@@ -210,15 +248,16 @@ void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef) {
  *@param cats : A pointer pointing to a catarray_t struct storing cat and words.
  *@return void.
 */
-void parseTemplate(FILE * f, catarray_t * cats) {
+void parseTemplate(FILE * f, catarray_t * cats, int noUsed) {
   char * curr = NULL;
   size_t sz;
   // init a word reference to store the words usef previously
   category_t * wordRef = malloc(sizeof(*wordRef));
   wordRef->n_words = 0;
   wordRef->words = NULL;
+  wordRef->name = NULL;
   while (getline(&curr, &sz, f) >= 0) {
-    parseLine(f, curr, cats, wordRef);
+    parseLine(f, curr, cats, wordRef, noUsed);
     free(curr);
     curr = NULL;
   }

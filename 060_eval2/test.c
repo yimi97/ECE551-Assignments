@@ -16,6 +16,7 @@ int main(void) {
   strcat(res, buffer);
   printf("%s\n", res);
   */
+  free(NULL);
   char * s = "abs";
   int x = atoi(s);
   printf("%d", x);

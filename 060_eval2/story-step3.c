@@ -13,7 +13,8 @@ int main(int argc, char ** argv) {
   catarray_t * c = parseWord(f_category);
 
   if (fclose(f_category) != 0) {
-    perror("Failed to close template file. \n");
+    perror("Failed to close category file. \n");
+    freeCatarray(c);
     exit(EXIT_FAILURE);
   }
 
@@ -23,7 +24,7 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
 
-  parseTemplate(f_template, c);
+  parseTemplate(f_template, c, 1);
   freeCatarray(c);
 
   if (fclose(f_template) != 0) {

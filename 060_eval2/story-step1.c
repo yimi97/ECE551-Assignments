@@ -11,7 +11,7 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
 
-  parseTemplate(f, NULL);
+  parseTemplate(f, NULL, 0);
 
   if (fclose(f) != 0) {
     perror("Failed to close the input file. \n");

@@ -12,7 +12,8 @@ void replaceWord(char * newWord,
                  FILE * f,
                  char * line,
                  catarray_t * cats,
-                 category_t * wordRef);
+                 category_t * wordRef,
+                 int noUsed);
 int checkExist(char * word, catarray_t * c);
 void addRef(const char * word, category_t * cat);
 void freeCategory(category_t * c);
@@ -24,7 +25,10 @@ void addWord(FILE * f, catarray_t * catarray, char * curr);
 catarray_t * parseWord(FILE * f);
 
 // Step1
-void parseTemplate(FILE * f, catarray_t * cats);
-void parseLine(FILE * f, char * line, catarray_t * cats, category_t * wordRef);
-
+void parseLine(FILE * f,
+               char * line,
+               catarray_t * cats,
+               category_t * wordRef,
+               int noUsed);
+void parseTemplate(FILE * f, catarray_t * cats, int noUsed);
 #endif
