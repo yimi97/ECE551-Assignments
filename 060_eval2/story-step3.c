@@ -24,7 +24,7 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
 
-  parseTemplate(f_template, c, 1);
+  parseTemplate(f_template, c, 0);
   freeCatarray(c);
 
   if (fclose(f_template) != 0) {
