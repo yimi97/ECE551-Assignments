@@ -1,39 +1,27 @@
-Grading at 10/17/2020:02:50:37.240620
-For commit ID 341b6334e7aca1d6f2679eaa7f41272e56452e25
-Grading at Fri Oct 16 22:50:30 EDT 2020
+Grading at 10/17/2020:02:54:53.866408
+For commit ID 868fd5737da1adc23d359ff4f49b84651f274673
+Grading at Fri Oct 16 22:54:47 EDT 2020
 -----------------------------------------------
 testcase 1 : Testing with Matrix<int>
 ...compiling...
 The code compiled.
   - Valgrind was clean (no errors, no memory leaks)
-Line_4_did_not_match
-Line_8_did_not_match
-Line_11_did_not_match
-Line_17_did_not_match
-Your file did not match the expected ouput
-Testcase failed 
+Your file matched the expected output
+Testcase passed 
 -----------------------------------------------
 testcase 2 : Testing with Matrix<std::string>
 ...compiling...
 The code compiled.
   - Valgrind was clean (no errors, no memory leaks)
-Line_4_did_not_match
-Line_8_did_not_match
-Line_11_did_not_match
-Line_17_did_not_match
-Your file did not match the expected ouput
-Testcase failed 
+Your file matched the expected output
+Testcase passed 
 -----------------------------------------------
 testcase 3 : Testing with Matrix<(a custom class we wrote)>
 ...compiling...
 The code compiled.
   - Valgrind was clean (no errors, no memory leaks)
-Line_4_did_not_match
-Line_8_did_not_match
-Line_11_did_not_match
-Line_17_did_not_match
-Your file did not match the expected ouput
-Testcase failed 
+Your file matched the expected output
+Testcase passed 
 --------------------------------------------
 Preparing to test assert fails...
 Compiling assertion failure tester...
@@ -59,4 +47,4 @@ testcase 7 :  operator+: different number of columns
 Your file matched the expected output
 Testcase passed
 
-Overall Grade: F
+Overall Grade: A
