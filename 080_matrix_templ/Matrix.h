@@ -90,27 +90,27 @@ class Matrix {
 
 template<typename T>
 std::ostream & operator<<(std::ostream & s, const std::vector<T> & rhs) {
-  s << "{";
+  s << "{ ";
   for (size_t i = 0; i < rhs.size() - 1; i++) {
     s << rhs[i] << ",";
   }
   if (rhs.size() - 1 >= 0) {
     s << rhs[rhs.size() - 1];
   }
-  s << "}";
+  s << " }";
   return s;
 }
 
 template<typename T>
 std::ostream & operator<<(std::ostream & s, const Matrix<T> & rhs) {
-  s << "[";
+  s << "[ ";
   for (int i = 0; i < rhs.getRows() - 1; i++) {
-    s << rhs[i] << ",";
+    s << rhs[i] << ",\n";
   }
   if (rhs.getRows() - 1 >= 0) {
     s << rhs[rhs.getRows() - 1];
   }
-  s << "]";
+  s << " ]";
   return s;
 }
 
