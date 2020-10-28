@@ -152,8 +152,11 @@ class LinkedList {
     }
     Node * r_prev = ptr->prev;
     Node * r_next = ptr->next;
+    /*
     if (r_prev == NULL && r_next == NULL) {
       delete ptr;
+      head = NULL;
+      tail = NULL;
       size--;
       return true;
     }
@@ -171,6 +174,22 @@ class LinkedList {
     delete ptr;
     size--;
     return true;
+    */
+    if (r_next) {
+      r_next->prev = r_prev;
+    }
+    else {
+      tail = r_prev;
+    }
+    if (r_prev) {
+      r_prev->next = r_next;
+    }
+    else {
+      head = r_next;
+    }
+    size--;
+    delete ptr;
+    return true;
   }
 
   int getSize() const { return size; }
@@ -181,7 +200,7 @@ class LinkedList {
     }
     else {
       Node * ptr = head;
-      for (int i = 0; i < size; i++) {
+      for (int i = 0; i < index; i++) {
         ptr = ptr->next;
       }
       return ptr->data;
@@ -194,12 +213,13 @@ class LinkedList {
     }
     else {
       Node * ptr = head;
-      for (int i = 0; i < size; i++) {
+      for (int i = 0; i < index; i++) {
         ptr = ptr->next;
       }
       return ptr->data;
     }
   }
+  friend void testList(void);
 };
 
 #endif
