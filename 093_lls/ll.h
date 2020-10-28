@@ -2,6 +2,7 @@
 #define _LL_H_
 #include <assert.h>
 
+#include <algorithm>
 #include <cstdlib>
 #include <exception>
 
@@ -31,7 +32,7 @@ class LinkedList {
   LinkedList() : head(NULL), tail(NULL), size(0) {}
   LinkedList(const LinkedList<T> & rhs) : head(NULL), tail(NULL), size(0) {
     for (int i = 0; i < rhs.getSize(); i++) {
-      this->addBack(rhs[i]);
+      addBack(rhs[i]);
     }
   }
   ~LinkedList() {
@@ -40,9 +41,12 @@ class LinkedList {
       delete head;
       head = ptr;
     }
+    tail = NULL;
+    size = 0;
   };
-  LinkedList & operator=(const LinkedList<T> & rhs) {
+  LinkedList<T> & operator=(const LinkedList<T> & rhs) {
     if (this != &rhs) {
+      /*
       while (head != NULL) {
         Node * ptr = head->next;
         delete head;
@@ -50,9 +54,13 @@ class LinkedList {
       }
       tail = NULL;  // ?
       for (int i = 0; i < rhs.getSize(); i++) {
-        this->addBack(rhs[i]);
+        addBack(rhs[i]);
       }
-      size = rhs.getSize();
+      size = rhs.getSize();*/
+      LinkedList temp(rhs);
+      std::swap(temp.tail, tail);
+      std::swap(temp.head, head);
+      std::swap(temp.size, size);
     }
     return *this;
   }
