@@ -30,10 +30,16 @@ class LinkedList {
 
  public:
   LinkedList() : head(NULL), tail(NULL), size(0) {}
-  LinkedList(const LinkedList<T> & rhs) : head(NULL), tail(NULL), size(0) {
+  LinkedList(const LinkedList & rhs) : head(NULL), tail(NULL), size(0) {
     for (int i = 0; i < rhs.getSize(); i++) {
       addBack(rhs[i]);
     }
+    /*
+    Node * ptr = rhs.tail;
+    while (ptr != NULL) {
+      this->addFront(ptr->data);
+      ptr = ptr->prev;
+      }*/
   }
   ~LinkedList() {
     while (head != NULL) {
@@ -44,45 +50,52 @@ class LinkedList {
     tail = NULL;
     size = 0;
   };
-  LinkedList<T> & operator=(const LinkedList<T> & rhs) {
+  LinkedList & operator=(const LinkedList & rhs) {
     if (this != &rhs) {
-      /*
       while (head != NULL) {
         Node * ptr = head->next;
         delete head;
         head = ptr;
       }
       tail = NULL;  // ?
+      size = 0;
+
       for (int i = 0; i < rhs.getSize(); i++) {
         addBack(rhs[i]);
       }
-      size = rhs.getSize();*/
+      /*
+      Node * ptr = rhs.tail;
+      while (ptr != NULL) {
+        this->addFront(ptr->data);
+        ptr = ptr->prev;
+      }
+      */
+      size = rhs.getSize();
+      /*
       LinkedList temp(rhs);
       std::swap(temp.tail, tail);
       std::swap(temp.head, head);
       std::swap(temp.size, size);
+      */
     }
     return *this;
   }
 
   void addFront(const T & item) {
     Node * ptr = new Node(item);
+    ptr->next = head;
+    head = ptr;
     if (tail == NULL) {
-      head = ptr;
-      tail = ptr;
-      size = 1;
+      tail = head;
     }
     else {
-      Node * temp = head;
-      head = ptr;
-      ptr->next = temp;
-      temp->prev = ptr;
-      size++;
+      head->next->prev = head;
     }
+    size++;
   }
 
   void addBack(const T & item) {
-    Node * ptr = new Node(item);
+    /*    Node * ptr = new Node(item);
     if (head == NULL) {
       head = ptr;
       tail = ptr;
@@ -94,14 +107,36 @@ class LinkedList {
       ptr->prev = temp;
       temp->next = ptr;
       size++;
+      }*/
+    Node * ptr = new Node(item);
+    ptr->prev = tail;
+    tail = ptr;
+    if (head == NULL) {
+      head = tail;
     }
+    else {
+      tail->prev->next = tail;
+    }
+    size++;
   }
 
-  int find(const T & item) {
+  int find(const T & item) const {
+    /*
     for (int i = 0; i < size; i++) {
       if ((*this)[i] == item) {
         return i;
       }
+    }
+    return -1;
+    */
+    Node * ptr = head;
+    int i = 0;
+    while (ptr != NULL) {
+      if (ptr->data == item) {
+        return i;
+      }
+      ptr = ptr->next;
+      i++;
     }
     return -1;
   }
@@ -141,25 +176,29 @@ class LinkedList {
   int getSize() const { return size; }
 
   T & operator[](int index) {
-    if (index >= size || index < 0) {
+    if (size == 0 || index >= size || index < 0) {
       throw myException();
     }
-    Node * ptr = head;
-    for (int i = 0; i < size; i++) {
-      ptr = ptr->next;
+    else {
+      Node * ptr = head;
+      for (int i = 0; i < size; i++) {
+        ptr = ptr->next;
+      }
+      return ptr->data;
     }
-    return ptr->data;
   }
 
   const T & operator[](int index) const {
     if (index >= size || index < 0) {
       throw myException();
     }
-    Node * ptr = head;
-    for (int i = 0; i < size; i++) {
-      ptr = ptr->next;
+    else {
+      Node * ptr = head;
+      for (int i = 0; i < size; i++) {
+        ptr = ptr->next;
+      }
+      return ptr->data;
     }
-    return ptr->data;
   }
 };
 
