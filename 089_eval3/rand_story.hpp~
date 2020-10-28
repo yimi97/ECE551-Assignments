@@ -1,0 +1,20 @@
+#include <iostream>
+#include <string>
+
+class Choice {
+ private:
+  int num;
+  const char * c;
+
+ public:
+  Choice(std::string line) {
+    std::size_t pos = line.find(':');
+    std::string n = line.substr(0, pos - '0');
+    c = (line.substr(pos)).c_str();
+    num = std::atoi(n);
+  }
+};
+
+class Page {
+ private:
+};
