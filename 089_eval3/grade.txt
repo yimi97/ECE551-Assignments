@@ -1,16 +1,13 @@
-Grading at 10/30/2020:21:04:46.822019
-For commit ID 4d2c841d5a34f00d496f8593769cec52d1f0be00
-Grading at Fri Oct 30 17:04:46 EDT 2020
+Grading at 10/30/2020:23:12:28.604581
+For commit ID ff8cf88724836b809c09de863a02aea5efd690a4
+Grading at Fri Oct 30 19:12:27 EDT 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 g++     cyoa-step1.cpp   -o cyoa-step1
 Testing ./cyoa-step1 story1/page1.txt 
-Line_22_did_not_match
-Line_23_did_not_match
-Line_24_did_not_match
-Your file did not match the expected ouput
+Your file matched the expected output
 Testing ./cyoa-step1 story1/page8.txt 
 Your file matched the expected output
 Testing ./cyoa-step1 story1/page11.txt 
@@ -28,7 +25,7 @@ Step 4
 Checking that cyoa-step4 compiles
 The code did not compile!
 
-Step 1: FAILED
+Step 1: PASSED
 Step 2: FAILED
 Step 3: FAILED
 Step 4: FAILED
