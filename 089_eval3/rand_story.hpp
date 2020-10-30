@@ -24,7 +24,7 @@ class Choice {
   }
   void testNum() { cout << "Choice number is: " << num << "\n"; }
   void testChoice() { cout << "Choice is: " << c << "\n"; }
-  void printChoice() { cout << " " << num << ". " << c << "\n"; }
+  void printChoice() { cout << c << "\n"; }
 };
 
 class Page {
@@ -70,8 +70,11 @@ class Page {
       cout << "\n"
            << "What would you like to do?\n\n";
       if (!choices.empty()) {
+        int i = 1;
         for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
+          cout << " " << i << ". ";
           (*it)->printChoice();
+          i++;
         }
       }  //else wrong
     }
@@ -89,8 +92,9 @@ void parseLine(string & line,
     //found a choice
     size_t pos = line.find(':');
     string n = line.substr(0, pos);
-    size_t dot = line.find('.');
-    string c = line.substr(pos + 1, dot - pos - 1);
+    //size_t dot = line.find('.');
+    //  string c = line.substr(pos + 1, dot - pos - 1);
+    string c = line.substr(pos + 1);
     Choice * cho = new Choice(atoi(n.c_str()), c);
     vector_choice.push_back(cho);
   }
