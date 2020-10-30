@@ -21,18 +21,13 @@ int main(int argc, char ** argv) {
   bool LOSE = false;
   ifs.open(argv[1], ifstream::in);
   if (ifs.fail()) {
-    cerr << "Bad input.\n" << endl;
+    cerr << "Bad input." << endl;
     exit(EXIT_FAILURE);
   }
   while (getline(ifs, line)) {
     parseLine(line, vector_choice, text, WIN, LOSE);
   }
   ifs.close();
-  // cout << vector_choice.size();
-
-  //    vector_choice[0]->printChoice();
-  //vector_choice[1]->printChoice();
-  //vector_choice[2]->printChoice();
   Page p(text, vector_choice, WIN, LOSE);
   p.printPage();
 

@@ -22,8 +22,8 @@ class Choice {
     }
     return *this;
   }
-  void testNum() { cout << "Choice number is " << num << "\n"; }
-  void testChoice() { cout << "Choice is " << c << "\n"; }
+  void testNum() { cout << "Choice number is: " << num << "\n"; }
+  void testChoice() { cout << "Choice is: " << c << "\n"; }
   void printChoice() { cout << " " << num << ". " << c << "\n"; }
 };
 
@@ -58,7 +58,6 @@ class Page {
   }
   void printPage() {
     printText();
-    //    cout << "vector size " << choices.size() << "\n";
     if (win) {
       cout << "\n";
       cout << "Congratulations! You have won. Hooray!\n";
@@ -73,10 +72,8 @@ class Page {
       if (!choices.empty()) {
         for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
           (*it)->printChoice();
-          //cout << "test\n";
-          //          (*it)->testChoice();
         }
-      }
+      }  //else wrong
     }
   }
 };
