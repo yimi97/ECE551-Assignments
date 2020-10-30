@@ -92,11 +92,9 @@ void parseLine(string & line,
     //found a choice
     size_t pos = line.find(':');
     string n = line.substr(0, pos);
-    string c = line.substr(pos + 1);
+    size_t dot = line.find('.');
+    string c = line.substr(pos + 1, dot - pos - 1);
     Choice * cho = new Choice(atoi(n.c_str()), c);
-    // cho->printChoice();
-    // cho->testNum();
-    // cho->testChoice();
     vector_choice.push_back(cho);
   }
   else if (line.find("WIN") == 0) {

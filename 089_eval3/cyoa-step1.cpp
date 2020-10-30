@@ -29,15 +29,12 @@ int main(int argc, char ** argv) {
   }
   ifs.close();
   // cout << vector_choice.size();
-  if (vector_choice.empty()) {
-    cout << "wrong!\n";
-  }
-  else {
-    //    vector_choice[0]->printChoice();
-    //vector_choice[1]->printChoice();
-    //vector_choice[2]->printChoice();
-    Page p(text, vector_choice, WIN, LOSE);
-    p.printPage();
-  }
+
+  //    vector_choice[0]->printChoice();
+  //vector_choice[1]->printChoice();
+  //vector_choice[2]->printChoice();
+  Page p(text, vector_choice, WIN, LOSE);
+  p.printPage();
+
   return EXIT_SUCCESS;
 }
