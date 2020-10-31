@@ -3,6 +3,13 @@
 #include <string>
 #include <vector>
 using namespace std;
+bool check_number(string s) {
+  string::iterator it = s.begin();
+  while (it != s.end() && isdigit(*it)) {
+    ++it;
+  }
+  return !s.empty() && it == s.end();
+}
 int main() {
   vector<int> v1 = {1, 2, 3};
   vector<int> v2 = v1;
@@ -19,7 +26,16 @@ int main() {
          << "\n";
   }
   int num = 1;
-  string str = "fk";
+  string str = "kk";
   cout << num << ":" << str << "\n";
+  string n = "12sdfb";
+  if (check_number(n)) {
+    cout << "is number\n";
+  }
+  else {
+    cout << "not a number\n";
+  }
+  int a = atoi(n.c_str());
+  cout << a << "\n";
   return EXIT_SUCCESS;
 }

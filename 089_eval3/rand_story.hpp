@@ -1,7 +1,11 @@
 #include <stdlib.h>
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <iterator>
+#include <set>
+#include <sstream>
 #include <string>
 #include <vector>
 using namespace std;
@@ -22,13 +26,14 @@ class Choice {
     }
     return *this;
   }
-  void testNum() { cout << "Choice number is: " << num << "\n"; }
+  int getNum() { return num; }
   void testChoice() { cout << "Choice is: " << c << "\n"; }
   void printChoice() { cout << c << "\n"; }
 };
 
 class Page {
  private:
+  int num;
   vector<string> text;
   vector<Choice *> choices;
   //string comment;
@@ -36,8 +41,9 @@ class Page {
   bool lose;
 
  public:
-  Page() : text(), choices(), win(false), lose(false) {}
-  Page(vector<string> & t, vector<Choice *> & c, bool w, bool l) :
+  Page() : num(), text(), choices(), win(false), lose(false) {}
+  Page(int n, vector<string> & t, vector<Choice *> & c, bool w, bool l) :
+      num(n),
       text(t),
       choices(),
       win(w),
@@ -51,12 +57,18 @@ class Page {
       delete choices[i];
     }
   }
+  bool getWin() { return win; }
+  bool getLose() { return lose; }
+  int getNum() { return num; }
+  int getChoiceNum() { return choices.size(); }
+  vector<Choice *> getChoice() { return choices; }
   void printText() {
     for (vector<string>::iterator it = text.begin(); it != text.end(); ++it) {
       cout << *it << "\n";
     }
   }
   void printPage() {
+    //    cout << "DEBUG: " << getNum() << "\n";
     printText();
     if (win) {
       cout << "\n";
@@ -73,6 +85,11 @@ class Page {
         int i = 1;
         for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
           cout << " " << i << ". ";
+          /*
+	  cout << "DEBUG: "
+               << " " << i << ". "
+               << "(" << (*it)->getNum() << ")";
+	  */
           (*it)->printChoice();
           i++;
         }
@@ -92,8 +109,6 @@ void parseLine(string & line,
     //found a choice
     size_t pos = line.find(':');
     string n = line.substr(0, pos);
-    //size_t dot = line.find('.');
-    //  string c = line.substr(pos + 1, dot - pos - 1);
     string c = line.substr(pos + 1);
     Choice * cho = new Choice(atoi(n.c_str()), c);
     vector_choice.push_back(cho);

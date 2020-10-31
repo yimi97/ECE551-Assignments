@@ -1,18 +1,6 @@
 #include "rand_story.hpp"
 using namespace std;
 int main(int argc, char ** argv) {
-  /*
-  Choice c1(1, "test");
-  Choice c2(2, "AAA");
-  Choice c3(3, "CCC");
-  vector<Choice *> v1;
-  v1.push_back(&c1);
-  v1.push_back(&c2);
-  v1.push_back(&c3);
-  Page p("The page text", v1, false, false);
-  p.printPage();
-  */
-
   string line;
   vector<Choice *> vector_choice;
   ifstream ifs;
@@ -28,7 +16,7 @@ int main(int argc, char ** argv) {
     parseLine(line, vector_choice, text, WIN, LOSE);
   }
   ifs.close();
-  Page p(text, vector_choice, WIN, LOSE);
+  Page p(0, text, vector_choice, WIN, LOSE);
   p.printPage();
 
   return EXIT_SUCCESS;
