@@ -48,7 +48,7 @@ bool all_reachable(vector<Page *> & vector_page, set<int> & page_num) {
   reachable.insert(1);
   while (!check_vec.empty()) {
     int p = check_vec[0];
-    cout << "DEBUG: page number " << p << endl;
+    //    cout << "DEBUG: page number " << p << endl;
     check_vec.erase(check_vec.begin());
     vector<Choice *> c = vector_page[p - 1]->getChoice();
     if (!c.empty()) {
