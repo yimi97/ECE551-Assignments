@@ -148,6 +148,12 @@ void parseLine(string & line,
 }
 
 // ================================== step2 ================================ //
+void read_pages(string & dir,
+                vector<Page *> & vector_page,
+                set<int> & page_num,
+                set<int> & choice_num,
+                bool & page_win,
+                bool & page_lose);
 bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose);
 bool compare_set(set<int> & set1, set<int> & set2);
 bool check_number(string s);

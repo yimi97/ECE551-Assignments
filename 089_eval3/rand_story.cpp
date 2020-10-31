@@ -1,4 +1,49 @@
 #include "rand_story.hpp"
+
+void read_pages(string & dir,
+                vector<Page *> & vector_page,
+                set<int> & page_num,
+                set<int> & choice_num,
+                bool & page_win,
+                bool & page_lose) {
+  ifstream ifs;
+  int i = 1;
+  while (true) {
+    string page = dir;
+    stringstream ss;
+    ss << i;
+    page.append(ss.str()).append(".txt");
+    ifs.open(page.c_str(), ifstream::in);
+    if (ifs.fail()) {
+      if (DEBUG)
+        cout << "DEBUG: read until " << page << endl;
+      break;
+    }
+    string line;
+    vector<Choice *> vector_choice;
+    vector<string> text;
+    bool WIN = false;
+    bool LOSE = false;
+    while (getline(ifs, line)) {
+      parseLine(line, vector_choice, text, WIN, LOSE);
+    }
+    ifs.close();
+    Page * p = new Page(i, text, vector_choice, WIN, LOSE);
+    if (p->getWin()) {
+      page_win = true;
+    }
+    if (p->getLose()) {
+      page_lose = true;
+    }
+    vector_page.push_back(p);
+    page_num.insert(i);
+    for (size_t j = 0; j < vector_choice.size(); j++) {
+      choice_num.insert(vector_choice[j]->getNum());
+    }
+    i++;
+  }
+}
+
 bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose) {
   if (compare_set(page_num, choice_num) && win && lose) {
     return true;

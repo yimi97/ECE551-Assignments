@@ -1,6 +1,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <memory>
+#include <queue>
 #include <set>
 #include <string>
 #include <vector>
@@ -13,6 +14,10 @@ bool check_number(string s) {
   return !s.empty() && it == s.end();
 }
 int main() {
+  set<int> s = {1, 3, 4, 5};
+  if (s.find(7) == s.end()) {
+    cout << "not exist\n";
+  }
   //  unique_ptr<int> p;
   /*
   vector<int> v1 = {1, 2, 3};
@@ -46,7 +51,14 @@ int main() {
   s1.insert(1);
   s1.insert(2);
   */
-  string s = "test memory leak";
-  exit(EXIT_FAILURE);
+  //  string s = "test memory leak";
+  //exit(EXIT_FAILURE);
+  /*
+  deque<int> q;
+  q.push_back(1);
+  q.push_back(2);
+  q.push_back(4);
+  q.pop_front();
+  */
   return EXIT_SUCCESS;
 }
