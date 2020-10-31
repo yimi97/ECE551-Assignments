@@ -1,5 +1,6 @@
 #include "rand_story.hpp"
 using namespace std;
+bool DEBUG = false;
 
 bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose);
 bool compare_set(set<int> & set1, set<int> & set2);
@@ -13,7 +14,8 @@ int main(int argc, char ** argv) {
   ifstream ifs;
   string page1 = argv[1];
   page1.append("/page1.txt");
-  cout << "DEBUG: page1 is " << page1 << endl;
+  if (DEBUG)
+    cout << "DEBUG: page1 is " << page1 << endl;
   ifs.open(page1.c_str(), ifstream::in);
   if (ifs.fail()) {
     cerr << "ERROR: Cannot open page1.\n";
@@ -36,7 +38,8 @@ int main(int argc, char ** argv) {
     //
     ifs.open(page.c_str(), ifstream::in);
     if (ifs.fail()) {
-      cout << "DEBUG: read until " << page << endl;
+      if (DEBUG)
+        cout << "DEBUG: read until " << page << endl;
       break;
     }
     string line;
@@ -67,7 +70,8 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
   else {
-    cout << "DEBUG: pages are valid.\n";
+    if (DEBUG)
+      cout << "DEBUG: pages are valid.\n";
     execute(vector_page);
   }
   return EXIT_SUCCESS;
@@ -78,7 +82,8 @@ void execute(vector<Page *> & page) {
   while (true) {
     p->printPage();
     if (check_exit(p)) {
-      cout << "DEBUG: exit successfully.\n";
+      if (DEBUG)
+        cout << "DEBUG: exit successfully.\n";
       free_page(page);
       exit(EXIT_SUCCESS);
     }
@@ -139,16 +144,18 @@ bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lo
 }
 
 bool compare_set(set<int> & set1, set<int> & set2) {
-  cout << "DEBUG: page set includes ";
-  for (set<int>::iterator it = set1.begin(); it != set1.end(); ++it) {
-    cout << *it << " ";
+  if (DEBUG) {
+    cout << "DEBUG: page set includes ";
+    for (set<int>::iterator it = set1.begin(); it != set1.end(); ++it) {
+      cout << *it << " ";
+    }
+    cout << endl;
+    cout << "DEBUG: choice set includes ";
+    for (set<int>::iterator it = set2.begin(); it != set2.end(); ++it) {
+      cout << *it << " ";
+    }
+    cout << endl;
   }
-  cout << endl;
-  cout << "DEBUG: choice set includes ";
-  for (set<int>::iterator it = set2.begin(); it != set2.end(); ++it) {
-    cout << *it << " ";
-  }
-  cout << endl;
   vector<int> diff;
   // TODO: cite
   set_symmetric_difference(
