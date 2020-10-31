@@ -97,7 +97,7 @@ void execute(vector<Page *> & page) {
         break;
       }
       else {
-        cout << "This is not a valid choice, please try again\n";
+        cout << "That is not a valid choice, please try again\n";
       }
     }
   }
