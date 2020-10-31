@@ -10,6 +10,8 @@
 #include <vector>
 using namespace std;
 
+bool DEBUG = false;
+
 class Choice {
  private:
   int num;
@@ -53,15 +55,33 @@ class Page {
     }
   }
   ~Page() {
-    for (size_t i = 0; i < choices.size(); i++) {
+    if (DEBUG)
+      cout << "DEBUG: page " << getNum() << " destructed" << endl;
+    for (int i = 0; i < getChoiceNum(); i++) {
       delete choices[i];
     }
   }
-  bool getWin() { return win; }
-  bool getLose() { return lose; }
-  int getNum() { return num; }
-  int getChoiceNum() { return choices.size(); }
-  vector<Choice *> getChoice() { return choices; }
+  Page & operator=(const Page & rhs) {
+    if (this != &rhs) {
+      for (int i = 0; i < getChoiceNum(); i++) {
+        delete choices[i];
+      }
+      num = rhs.getNum();  //private??? rhs.num; or rhs.getNum();?
+      text = rhs.getText();
+      win = rhs.getWin();
+      lose = rhs.getLose();
+      for (int i = 0; i < rhs.getChoiceNum(); i++) {
+        choices.push_back(rhs.getChoice()[i]);
+      }
+    }
+    return *this;
+  }
+  bool getWin() const { return win; }
+  bool getLose() const { return lose; }
+  int getNum() const { return num; }
+  vector<string> getText() const { return text; }
+  int getChoiceNum() const { return choices.size(); }
+  vector<Choice *> getChoice() const { return choices; }
   void printText() {
     for (vector<string>::iterator it = text.begin(); it != text.end(); ++it) {
       cout << *it << "\n";
@@ -85,11 +105,11 @@ class Page {
         int i = 1;
         for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
           cout << " " << i << ". ";
-          /*
-	  cout << "DEBUG: "
-               << " " << i << ". "
-               << "(" << (*it)->getNum() << ")";
-	  */
+          if (DEBUG) {
+            cout << "DEBUG: "
+                 << " " << i << ". "
+                 << "(" << (*it)->getNum() << ")";
+          }
           (*it)->printChoice();
           i++;
         }
@@ -126,3 +146,12 @@ void parseLine(string & line,
     text.push_back(line);
   }
 }
+
+// ================================== step2 ================================ //
+bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose);
+bool compare_set(set<int> & set1, set<int> & set2);
+bool check_number(string s);
+bool check_number_valid(string s, Page * p);
+bool check_exit(Page * p);
+void execute(vector<Page *> & page);
+void free_page(vector<Page *> & page);

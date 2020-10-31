@@ -1,7 +1,7 @@
-#include "rand_story.hpp"
+#include "rand_story.cpp"
 using namespace std;
-bool DEBUG = false;
-
+//bool DEBUG = false;
+/*
 bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose);
 bool compare_set(set<int> & set1, set<int> & set2);
 bool check_number(string s);
@@ -9,7 +9,7 @@ bool check_number_valid(string s, Page * p);
 bool check_exit(Page * p);
 void execute(vector<Page *> & page);
 void free_page(vector<Page *> & page);
-
+*/
 int main(int argc, char ** argv) {
   ifstream ifs;
   string page1 = argv[1];
@@ -77,6 +77,7 @@ int main(int argc, char ** argv) {
   return EXIT_SUCCESS;
 }
 
+/*
 void execute(vector<Page *> & page) {
   Page * p = page[0];
   while (true) {
@@ -105,9 +106,13 @@ void execute(vector<Page *> & page) {
 
 void free_page(vector<Page *> & page) {
   for (size_t i = 0; i < page.size(); i++) {
+    if (DEBUG)
+      cout << "DEBUG: free page.\n";
     delete page[i];
   }
+  page.clear();
 }
+
 bool check_number(string s) {
   string::iterator it = s.begin();
   while (it != s.end() && isdigit(*it)) {
@@ -162,3 +167,4 @@ bool compare_set(set<int> & set1, set<int> & set2) {
       set1.begin(), set1.end(), set2.begin(), set2.end(), back_inserter(diff));
   return diff.size() == 1 && diff[0] == 1;
 }
+*/

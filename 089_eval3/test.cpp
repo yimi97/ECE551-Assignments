@@ -1,5 +1,7 @@
 #include <cstdlib>
 #include <iostream>
+#include <memory>
+#include <set>
 #include <string>
 #include <vector>
 using namespace std;
@@ -11,6 +13,8 @@ bool check_number(string s) {
   return !s.empty() && it == s.end();
 }
 int main() {
+  //  unique_ptr<int> p;
+  /*
   vector<int> v1 = {1, 2, 3};
   vector<int> v2 = v1;
   for (int n : v2) {
@@ -37,5 +41,12 @@ int main() {
   }
   int a = atoi(n.c_str());
   cout << a << "\n";
+
+  set<int> s1;
+  s1.insert(1);
+  s1.insert(2);
+  */
+  string s = "test memory leak";
+  exit(EXIT_FAILURE);
   return EXIT_SUCCESS;
 }
