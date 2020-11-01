@@ -1,5 +1,5 @@
-Grading at 10/31/2020:23:48:37.676402
-For commit ID 9b61bf3ad3af9478bb6c8c27f2120870bb6d9a29
+Grading at 11/01/2020:00:22:51.457645
+For commit ID 7007e0fd23210a2d4697793f88fef498b55c17e6
 ne_498286_did_not_match
 Line_498287_did_not_match
 Line_498288_did_not_match
@@ -70609,7 +70609,7 @@ Line_568891_did_not_match
 Line_568892_did_not_match
 Your file did not match the expected ouput
 Testing ./cyoa-step3 cycle 
-Your file did not match the expected ouput
+Your file matched the expected output
 
 Step 4
 Checking that cyoa-step4 compiles
