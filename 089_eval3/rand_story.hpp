@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <iterator>
+#include <map>
 #include <set>
 #include <sstream>
 #include <string>
@@ -55,8 +56,8 @@ class Page {
     }
   }
   ~Page() {
-    if (DEBUG)
-      cout << "DEBUG: page " << getNum() << " destructed" << endl;
+    //    if (DEBUG)
+    // cout << "DEBUG: page " << getNum() << " destructed" << endl;
     for (int i = 0; i < getChoiceNum(); i++) {
       delete choices[i];
     }
@@ -82,6 +83,13 @@ class Page {
   vector<string> getText() const { return text; }
   int getChoiceNum() const { return choices.size(); }
   vector<Choice *> getChoice() const { return choices; }
+  vector<int> getChoiceVec() {
+    vector<int> v;
+    for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
+      v.push_back((*it)->getNum());
+    }
+    return v;
+  }
   void printText() {
     for (vector<string>::iterator it = text.begin(); it != text.end(); ++it) {
       cout << *it << "\n";

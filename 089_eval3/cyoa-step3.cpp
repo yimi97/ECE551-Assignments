@@ -36,11 +36,13 @@ int main(int argc, char ** argv) {
       cout << "Page " << diff[i] << " is not reachable\n";
     }
     free_page(vector_page);
-    exit(EXIT_FAILURE);
+    //    exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
   }
   else {
     if (DEBUG)
       cout << "DEBUG: pages are valid.\n";
+    free_page(vector_page);
     //    execute(vector_page);
   }
   return EXIT_SUCCESS;

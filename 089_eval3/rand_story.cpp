@@ -107,7 +107,7 @@ void execute(vector<Page *> & page) {
       if (DEBUG)
         cout << "DEBUG: exit successfully.\n";
       free_page(page);
-      exit(EXIT_SUCCESS);
+      return;
     }
     string s;
     while (true) {
@@ -127,8 +127,8 @@ void execute(vector<Page *> & page) {
 
 void free_page(vector<Page *> & page) {
   for (size_t i = 0; i < page.size(); i++) {
-    if (DEBUG)
-      cout << "DEBUG: free page.\n";
+    //if (DEBUG)
+    //      cout << "DEBUG: free page.\n";
     delete page[i];
   }
   page.clear();

@@ -12,7 +12,8 @@ int main(int argc, char ** argv) {
   ifs.open(page1.c_str(), ifstream::in);
   if (ifs.fail()) {
     cerr << "ERROR: Cannot open page1.\n";
-    exit(EXIT_FAILURE);
+    //    exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
   }
   ifs.close();
   // read other pages
@@ -28,7 +29,9 @@ int main(int argc, char ** argv) {
 
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
     cerr << "ERROR: pages are not valid!\n";
-    exit(EXIT_FAILURE);
+    free_page(vector_page);
+    //exit(EXIT_FAILURE);
+    return EXIT_FAILURE;
   }
   else {
     if (DEBUG)
