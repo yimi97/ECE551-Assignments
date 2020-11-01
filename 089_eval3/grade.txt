@@ -1,13 +1,16 @@
-Grading at 11/01/2020:04:35:03.751680
-For commit ID 8033317cc492e0f9f67a6a1f147453ef5748fe8b
-Grading at Sun Nov  1 00:35:00 EDT 2020
+Grading at 11/01/2020:04:53:17.981360
+For commit ID ba73f62189c55a617369f508226af6d7125c507d
+Grading at Sun Nov  1 00:53:14 EDT 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 g++     cyoa-step1.cpp   -o cyoa-step1
 Testing ./cyoa-step1 story1/page1.txt 
-Your file matched the expected output
+Line_22_did_not_match
+Line_23_did_not_match
+Line_24_did_not_match
+Your file did not match the expected ouput
 Testing ./cyoa-step1 story1/page8.txt 
 Your file matched the expected output
 Testing ./cyoa-step1 story1/page11.txt 
@@ -17,32 +20,129 @@ Step 2
 Checking that cyoa-step2 compiles
 g++     cyoa-step2.cpp   -o cyoa-step2
 Testing ./cyoa-step2 story1 2\n1\n
-Your file matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_27_did_not_match
+Line_28_did_not_match
+Line_29_did_not_match
+Line_51_did_not_match
+Line_52_did_not_match
+Line_53_did_not_match
+Line_81_did_not_match
+Your file did not match the expected ouput
 Testing ./cyoa-step2 story1 1\n4\n1\n3\n
-Your file matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_27_did_not_match
+Line_28_did_not_match
+Line_29_did_not_match
+Line_51_did_not_match
+Line_52_did_not_match
+Line_53_did_not_match
+Line_72_did_not_match
+Line_73_did_not_match
+Line_74_did_not_match
+Line_92_did_not_match
+Your file did not match the expected ouput
 
 Step 3
 Checking that cyoa-step3 compiles
 g++     cyoa-step3.cpp   -o cyoa-step3
 Testing ./cyoa-step3 story1 
-Your file matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Line_7_did_not_match
+Line_8_did_not_match
+Line_9_did_not_match
+Line_10_did_not_match
+Line_11_did_not_match
+Line_12_did_not_match
+Line_13_did_not_match
+Line_14_did_not_match
+Line_15_did_not_match
+Line_16_did_not_match
+Line_17_did_not_match
+Line_18_did_not_match
+Your file did not match the expected ouput
 Testing ./cyoa-step3 cycle 
-Your file matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Line_7_did_not_match
+Line_8_did_not_match
+Line_9_did_not_match
+Line_10_did_not_match
+Line_11_did_not_match
+Line_12_did_not_match
+Line_13_did_not_match
+Line_14_did_not_match
+Line_15_did_not_match
+Line_16_did_not_match
+Your file did not match the expected ouput
 
 Step 4
 Checking that cyoa-step4 compiles
 g++     cyoa-step4.cpp   -o cyoa-step4
 Testing ./cyoa-step4 one_win 
-Your file matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Line_7_did_not_match
+Line_8_did_not_match
+Line_9_did_not_match
+Line_10_did_not_match
+Line_11_did_not_match
+Line_12_did_not_match
+Line_13_did_not_match
+Line_14_did_not_match
+Line_15_did_not_match
+Line_16_did_not_match
+Line_17_did_not_match
+Line_18_did_not_match
+Your file did not match the expected ouput
 Testing ./cyoa-step4 story1
-Your output matched the expected output
+Line_1_did_not_match
+Line_2_did_not_match
+Line_3_did_not_match
+Line_4_did_not_match
+Line_5_did_not_match
+Line_6_did_not_match
+Line_7_did_not_match
+Line_8_did_not_match
+Line_9_did_not_match
+Line_10_did_not_match
+Line_11_did_not_match
+Line_12_did_not_match
+Line_13_did_not_match
+Line_14_did_not_match
+Line_15_did_not_match
+Line_16_did_not_match
+Line_17_did_not_match
+Line_18_did_not_match
+Your output did not match the expected output
 
-Step 1: PASSED
-Step 2: PASSED
-Step 3: PASSED
-Step 4: PASSED
+Step 1: FAILED
+Step 2: FAILED
+Step 3: FAILED
+Step 4: FAILED
 
-You have passed the pregrader's test cases, but you should still
-do extensive testing of your own.
+You have NOT passed the pregrader's test cases.
+You should go back and debug the indicated step(s).
 
 Overall Grade: NO GRADE YET
