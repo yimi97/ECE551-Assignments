@@ -55,7 +55,10 @@ void find_path(vector<Page *> & vector_page, set<int> & reachable) {
   }
   if (win_num == -1) {
     cerr << "There is no way to win\n";
+    free_page(vector_page);
     exit(EXIT_FAILURE);
+    //    return EXIT_FAILURE;
+    //    return;
   }
   map<int, map<int, int> > parent;
   make_parent(child, parent);

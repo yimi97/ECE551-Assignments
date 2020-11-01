@@ -11,7 +11,7 @@
 #include <vector>
 using namespace std;
 
-bool DEBUG = false;
+bool DEBUG = true;
 
 class Choice {
  private:
