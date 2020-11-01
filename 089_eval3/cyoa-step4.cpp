@@ -3,22 +3,7 @@ using namespace std;
 bool all_reachable(vector<Page *> & vector_page, set<int> & page_num, vector<int> & diff);
 bool equal_set(set<int> & s1, set<int> & s2, vector<int> & diff);
 
-void make_parent(map<int, vector<int> > & child,
-                 map<int, map<int, int> > & parent,
-                 int & win) {
-  for (map<int, vector<int> >::iterator it = child.begin(); it != child.end(); ++it) {
-    for (size_t i = 0; i < it->second.size(); i++) {
-      int key = it->second[i];
-      if (parent.find(key) == parent.end()) {
-        map<int, int> value;
-        value.insert(pair<int, int>(it->first, i + 1));
-        parent.insert(pair<int, map<int, int> >(key, value));
-      }
-      else {
-        parent[key].insert((pair<int, int>(it->first, i + 1)));
-      }
-    }
-  }
+void make_path(map<int, map<int, int> > & parent, int & win) {
   vector<vector<int> > path;
   vector<int> vec;
   vec.push_back(win);
@@ -39,6 +24,22 @@ void make_parent(map<int, vector<int> > & child,
   cout << "Page " << path[0][0] << " WIN" << endl;
 }
 
+void make_parent(map<int, vector<int> > & child, map<int, map<int, int> > & parent) {
+  for (map<int, vector<int> >::iterator it = child.begin(); it != child.end(); ++it) {
+    for (size_t i = 0; i < it->second.size(); i++) {
+      int key = it->second[i];
+      if (parent.find(key) == parent.end()) {
+        map<int, int> value;
+        value.insert(pair<int, int>(it->first, i + 1));
+        parent.insert(pair<int, map<int, int> >(key, value));
+      }
+      else {
+        parent[key].insert((pair<int, int>(it->first, i + 1)));
+      }
+    }
+  }
+}
+
 void find_path(vector<Page *> & vector_page, set<int> & reachable) {
   int win_num = -1;
   map<int, vector<int> > child;
@@ -57,7 +58,8 @@ void find_path(vector<Page *> & vector_page, set<int> & reachable) {
     exit(EXIT_FAILURE);
   }
   map<int, map<int, int> > parent;
-  make_parent(child, parent, win_num);
+  make_parent(child, parent);
+  make_path(parent, win_num);
   /*
   for (map<int, vector<int> >::iterator it = parent.begin(); it != parent.end(); ++it) {
     cout << "DEBUG: key is " << it->first << endl;
