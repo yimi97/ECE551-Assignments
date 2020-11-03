@@ -1,6 +1,6 @@
-Grading at 11/03/2020:23:38:30.607192
-For commit ID ad78955112aec55775ad6b70d5df429bf90a3ae5
-Grading at Tue Nov  3 18:38:29 EST 2020
+Grading at 11/03/2020:23:41:12.056554
+For commit ID f73474f4db9695343fca24d05cf53d9c8358cbc6
+Grading at Tue Nov  3 18:41:10 EST 2020
 -----------------------------------------------
 testcase 1 : Testing with BstMap<int,int>
 ...compiling...
@@ -10,13 +10,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<int, int>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 2 : Testing with BstMap<int,std::string>
@@ -27,13 +20,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<int, std::__cxx11::basic_string<char> >’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 3 : Testing with BstMap<int,(a custom class we wrote)>
@@ -44,13 +30,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<int, Tester>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 4 : Testing with BstMap<std::string,int>
@@ -61,13 +40,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<std::__cxx11::basic_string<char>, int>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 5 : Testing with BstMap<std::string,std::string>
@@ -78,13 +50,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<std::__cxx11::basic_string<char>, std::__cxx11::basic_string<char> >’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 6 : Testing with BstMap<std::string,(a custom class we wrote)>
@@ -95,13 +60,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<std::__cxx11::basic_string<char>, Tester>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 7 : Testing with BstMap<(a custom class we wrote),int>
@@ -112,13 +70,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<Tester, int>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 8 : Testing with BstMap<(a custom class we wrote),std::string>
@@ -129,13 +80,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<Tester, std::__cxx11::basic_string<char> >’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 -----------------------------------------------
 testcase 9 : Testing with BstMap<(a custom class we wrote),(a custom class we wrote)>
@@ -146,13 +90,6 @@ bstmap.h: In instantiation of ‘BstMap<K, V>& BstMap<K, V>::operator=(const Bst
 bstmap.h:112:17: error: no match for ‘operator*’ (operand type is ‘const BstMap<Tester, Tester>’)
      if (this != *rhs) {
                  ^~~~
-bstmap.h:113:18: error: ‘desctructor’ was not declared in this scope
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-bstmap.h:113:18: note: suggested alternative: ‘destructor’
-       desctructor(root);
-       ~~~~~~~~~~~^~~~~~
-       destructor
 The code did not compile.  This test failed.
 
 Overall Grade: F
