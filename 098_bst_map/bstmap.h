@@ -110,7 +110,7 @@ class BstMap : public Map<K, V> {
   BstMap(const BstMap & rhs) : root(NULL) { root = copy(rhs.root); }
   BstMap & operator=(const BstMap & rhs) {
     if (this != *rhs) {
-      desctructor(root);
+      destructor(root);
       root = copy(rhs.root);
     }
     return *this;
