@@ -95,9 +95,26 @@ class BstMap : public Map<K, V> {
     delete node;
   }
 
+  Node * copy(Node * node) {
+    if (!node) {
+      return NULL;
+    }
+    Node * curr = new Node(node->key, node->value);
+    curr->left = copy(node->left);
+    curr->right = copy(node->right);
+    return curr;
+  }
+
  public:
   BstMap() : root(NULL) {}
-
+  BstMap(const BstMap & rhs) : root(NULL) { root = copy(rhs.root); }
+  BstMap & operator=(const BstMap & rhs) {
+    if (this != *rhs) {
+      desctructor(root);
+      root = copy(rhs.root);
+    }
+    return *this;
+  }
   virtual void add(const K & key, const V & value) { root = add(key, value, root); }
   virtual const V & lookup(const K & key) const throw(std::invalid_argument) {
     return lookup(key, this->root);
