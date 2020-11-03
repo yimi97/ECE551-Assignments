@@ -83,7 +83,7 @@ class Page {
   vector<string> getText() const { return text; }
   int getChoiceNum() const { return choices.size(); }
   vector<Choice *> getChoice() const { return choices; }
-  vector<int> getChoiceVec() {
+  vector<int> getChoiceVec() {  // TODO: should be const
     vector<int> v;
     for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
       v.push_back((*it)->getNum());
@@ -132,7 +132,7 @@ void parseLine(string & line,
                bool & win,
                bool & lose) {
   // choice / win / lose / # / text
-  // remember to check error!
+  // TODO: remember to check error!
   if ((line.find(':') != string::npos) && isdigit(line[0])) {
     //found a choice
     size_t pos = line.find(':');

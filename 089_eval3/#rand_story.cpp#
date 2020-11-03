@@ -1,7 +1,5 @@
 #include "rand_story.hpp"
 
-bool validate_format();
-
 void read_pages(string & dir,
                 vector<Page *> & vector_page,
                 set<int> & page_num,
@@ -10,7 +8,7 @@ void read_pages(string & dir,
                 bool & page_lose) {
   ifstream ifs;
   int i = 1;
-  while (true) {
+ v while (true) {
     string page = dir;
     stringstream ss;
     ss << i;
