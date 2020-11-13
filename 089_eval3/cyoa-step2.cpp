@@ -2,8 +2,11 @@
 using namespace std;
 
 int main(int argc, char ** argv) {
-  // TODO: check argc
-  // read page1
+  if (argc != 2) {
+    std::cerr << "USAGE: ./cyoa-step2 dir_name\n";
+    exit(EXIT_FAILURE);
+  }
+  // read page 1
   ifstream ifs;
   string page1 = argv[1];
   page1.append("/page1.txt");
@@ -12,8 +15,7 @@ int main(int argc, char ** argv) {
   ifs.open(page1.c_str(), ifstream::in);
   if (ifs.fail()) {
     cerr << "ERROR: Cannot open page1.\n";
-    //    exit(EXIT_FAILURE);
-    return EXIT_FAILURE;
+    exit(EXIT_FAILURE);
   }
   ifs.close();
   // read other pages
@@ -30,8 +32,7 @@ int main(int argc, char ** argv) {
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
     cerr << "ERROR: pages are not valid!\n";
     free_page(vector_page);
-    //exit(EXIT_FAILURE);
-    return EXIT_FAILURE;
+    exit(EXIT_FAILURE);
   }
   else {
     if (DEBUG)

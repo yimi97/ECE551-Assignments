@@ -1,3 +1,6 @@
+clean:
+	rm -f *.o *~
+
 CCFLAGS=--std=gnu++98 -pedantic -Wall -Werror -ggdb3
 all: step1 step2 step3 step4
 step1: cyoa-step1.cpp rand_story.hpp

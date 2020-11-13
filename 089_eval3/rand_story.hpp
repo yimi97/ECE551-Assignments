@@ -12,7 +12,7 @@
 using namespace std;
 
 bool DEBUG = false;
-
+//
 class Choice {
  private:
   int num;
@@ -39,7 +39,6 @@ class Page {
   int num;
   vector<string> text;
   vector<Choice *> choices;
-  //string comment;
   bool win;
   bool lose;
 
@@ -56,8 +55,6 @@ class Page {
     }
   }
   ~Page() {
-    //    if (DEBUG)
-    // cout << "DEBUG: page " << getNum() << " destructed" << endl;
     for (int i = 0; i < getChoiceNum(); i++) {
       delete choices[i];
     }
@@ -125,35 +122,14 @@ class Page {
     }
   }
 };
+// ================================== step4 ================================ //
+void make_path(map<int, map<int, int> > & parent, int & win);
+void make_parent(map<int, vector<int> > & child, map<int, map<int, int> > & parent);
+void make_child(vector<Page *> & vector_page, set<int> & reachable);
 
-void parseLine(string & line,
-               vector<Choice *> & vector_choice,
-               vector<string> & text,
-               bool & win,
-               bool & lose) {
-  // choice / win / lose / # / text
-  // TODO: remember to check error!
-  if ((line.find(':') != string::npos) && isdigit(line[0])) {
-    //found a choice
-    size_t pos = line.find(':');
-    string n = line.substr(0, pos);
-    string c = line.substr(pos + 1);
-    Choice * cho = new Choice(atoi(n.c_str()), c);
-    vector_choice.push_back(cho);
-  }
-  else if (line.find("WIN") == 0) {
-    win = true;
-  }
-  else if (line.find("LOSE") == 0) {
-    lose = true;
-  }
-  else if (line.find('#') == 0) {
-    return;
-  }
-  else {
-    text.push_back(line);
-  }
-}
+// ================================== step3 ================================ //
+bool all_reachable(vector<Page *> & vector_page, set<int> & page_num, vector<int> & diff);
+bool equal_set(set<int> & s1, set<int> & s2, vector<int> & diff);
 
 // ================================== step2 ================================ //
 void read_pages(string & dir,
@@ -169,3 +145,13 @@ bool check_number_valid(string s, Page * p);
 bool check_exit(Page * p);
 void execute(vector<Page *> & page);
 void free_page(vector<Page *> & page);
+
+// ================================== step1 ================================ //
+bool line_choice(const string & line);
+bool validate_format(ifstream & ifs);
+void parseLine(string & line,
+               vector<Choice *> & vector_choice,
+               vector<string> & text,
+               bool & win,
+               bool & lose,
+               bool & pond);

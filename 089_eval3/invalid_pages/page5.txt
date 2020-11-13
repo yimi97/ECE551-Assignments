@@ -1,0 +1,4 @@
+WIN
+LOSE
+#
+page5

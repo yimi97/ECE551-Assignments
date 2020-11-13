@@ -16,7 +16,7 @@ bool check_number(string & s) {
 }
 
 int main() {
-  string s = "123sdg";
+  string s = "  123";
   int a = atoi(s.c_str());
   if (check_number(s))
     cout << "TRUE" << endl;

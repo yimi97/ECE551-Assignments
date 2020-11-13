@@ -1,3 +1,0 @@
-#include "rand_story.hpp"
-bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose) {
-}
