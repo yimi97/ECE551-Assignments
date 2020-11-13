@@ -1,10 +1,11 @@
-Grading at 11/10/2020:18:29:31.810107
-For commit ID d62a3c9b3d3e554f7bb01d7f93685fff43add05f
-Grading at Tue Nov 10 13:29:28 EST 2020
+Grading at 11/13/2020:06:04:43.176082
+For commit ID 3f50de833c474c9601367a4ed549bd585aaec0c5
+Grading at Fri Nov 13 01:04:38 EST 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
+rm -f *.o *~
 g++     cyoa-step1.cpp   -o cyoa-step1
 Testing ./cyoa-step1 story1/page1.txt 
 Your file matched the expected output
@@ -15,6 +16,7 @@ Your file matched the expected output
 
 Step 2
 Checking that cyoa-step2 compiles
+rm -f *.o *~
 g++     cyoa-step2.cpp   -o cyoa-step2
 Testing ./cyoa-step2 story1 2\n1\n
 Your file matched the expected output
@@ -23,6 +25,7 @@ Your file matched the expected output
 
 Step 3
 Checking that cyoa-step3 compiles
+rm -f *.o *~
 g++     cyoa-step3.cpp   -o cyoa-step3
 Testing ./cyoa-step3 story1 
 Your file matched the expected output
@@ -31,6 +34,7 @@ Your file matched the expected output
 
 Step 4
 Checking that cyoa-step4 compiles
+rm -f *.o *~
 g++     cyoa-step4.cpp   -o cyoa-step4
 Testing ./cyoa-step4 one_win 
 Your file matched the expected output
