@@ -101,8 +101,6 @@ bool all_reachable(std::vector<Page *> & vector_page,
   reachable.insert(1);
   while (!check_vec.empty()) {
     int p = check_vec[0];
-    if (DEBUG)
-      std::cout << "DEBUG: page " << p << " can be reached.\n";
     check_vec.erase(check_vec.begin());
     std::vector<Choice *> c = vector_page[p - 1]->getChoice();
     if (!c.empty()) {
@@ -251,18 +249,6 @@ bool validate_page(std::set<int> & page_num,
  *@return bool.
 */
 bool compare_set(std::set<int> & set1, std::set<int> & set2) {
-  if (DEBUG) {
-    std::cout << "DEBUG: page set includes ";
-    for (std::set<int>::iterator it = set1.begin(); it != set1.end(); ++it) {
-      std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-    std::cout << "DEBUG: choice set includes ";
-    for (std::set<int>::iterator it = set2.begin(); it != set2.end(); ++it) {
-      std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-  }
   std::vector<int> diff;
   // TODO: cite
   set_symmetric_difference(
@@ -324,8 +310,6 @@ void execute(std::vector<Page *> & page) {
   while (true) {
     p->printPage();
     if (check_exit(p)) {
-      if (DEBUG)
-        std::cout << "DEBUG: exit successfully.\n";
       free_page(page);
       return;
     }
@@ -515,7 +499,7 @@ Page & Page::operator=(const Page & rhs) {
     for (int i = 0; i < getChoiceNum(); i++) {
       delete choices[i];
     }
-    num = rhs.getNum();  //private??? rhs.num; or rhs.getNum();?
+    num = rhs.getNum();
     text = rhs.getText();
     win = rhs.getWin();
     lose = rhs.getLose();
@@ -562,14 +546,9 @@ void Page::printPage() const {
            it != choices.end();
            ++it) {
         std::cout << " " << i << ". ";
-        if (DEBUG) {
-          std::cout << "DEBUG: "
-                    << " " << i << ". "
-                    << "(" << (*it)->getNum() << ")";
-        }
         (*it)->printChoice();
         i++;
       }
-    }  //else wrong
+    }
   }
 }

@@ -10,8 +10,6 @@
 #include <string>
 #include <vector>
 
-bool DEBUG = false;
-
 class Choice {
  private:
   int num;        // the number of a choice

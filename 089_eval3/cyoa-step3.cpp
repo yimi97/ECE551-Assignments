@@ -32,16 +32,12 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
   else if (!all_reachable(vector_page, page_num, diff)) {
-    if (DEBUG)
-      std::cout << "DEBUG: Not all reachable!\n";
     for (size_t i = 0; i < diff.size(); i++) {
       std::cout << "Page " << diff[i] << " is not reachable\n";
     }
     free_page(vector_page);
   }
   else {
-    if (DEBUG)
-      std::cout << "DEBUG: pages are valid.\n";
     free_page(vector_page);
   }
   return EXIT_SUCCESS;

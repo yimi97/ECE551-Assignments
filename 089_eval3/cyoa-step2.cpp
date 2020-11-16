@@ -9,8 +9,6 @@ int main(int argc, char ** argv) {
   std::ifstream ifs;
   std::string page1 = argv[1];
   page1.append("/page1.txt");
-  if (DEBUG)
-    std::cout << "DEBUG: page1 is " << page1 << std::endl;
   ifs.open(page1.c_str(), std::ifstream::in);
   if (ifs.fail()) {
     std::cerr << "ERROR: Cannot open page1.\n";

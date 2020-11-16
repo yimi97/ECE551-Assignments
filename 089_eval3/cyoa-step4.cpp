@@ -23,27 +23,22 @@ int main(int argc, char ** argv) {
   bool page_win = false;
   bool page_lose = false;
   std::vector<Page *> vector_page;
-
+  // read all pages
   read_pages(dir, vector_page, page_num, choice_num, page_win, page_lose);
-  std::vector<int> diff;
+  // chesk if satisfy step2 constraint
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
     std::cerr << "ERROR: pages are not valid as step2's constraint!\n";
     free_page(vector_page);
     exit(EXIT_FAILURE);
   }
-
+  // find all reachable pages, basically remove diff from reachable
+  std::vector<int> diff;
   all_reachable(vector_page, page_num, diff);
   std::set<int> reachable = page_num;
   for (size_t i = 0; i < diff.size(); i++) {
     reachable.erase(diff[i]);
   }
-  if (DEBUG) {
-    std::cout << "DEBUG: reachable pages include ";
-    for (std::set<int>::iterator it = reachable.begin(); it != reachable.end(); ++it) {
-      std::cout << *it << " ";
-    }
-    std::cout << std::endl;
-  }
+  // find path
   make_child(vector_page, reachable);
   free_page(vector_page);
   return EXIT_SUCCESS;
