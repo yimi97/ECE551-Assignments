@@ -17,6 +17,7 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
   ifs.close();
+  page1.clear();
   // read other pages
   std::string dir = argv[1];
   dir.append("/page");
@@ -38,5 +39,6 @@ int main(int argc, char ** argv) {
       std::cout << "DEBUG: pages are valid.\n";
     execute(vector_page);
   }
+  free_page(vector_page);
   return EXIT_SUCCESS;
 }

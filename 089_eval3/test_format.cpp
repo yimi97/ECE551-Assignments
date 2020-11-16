@@ -4,23 +4,7 @@
 #include <string>
 
 #include "rand_story.cpp"
-/*
-bool line_choice(const std::string & line) {
-  if (line.find(':') == std::string::npos) {
-    return false;
-  }
-  size_t pos = line.find(':');
-  std::string num = line.substr(0, pos);
-  const char * ptr = num.c_str();
-  while (*ptr != '\0') {
-    if (!isdigit(*ptr)) {
-      return false;
-    }
-    ptr++;
-  }
-  return true;
-}
-*/
+
 void freeChoice(std::vector<Choice *> & vector_choice) {
   for (size_t i = 0; i < vector_choice.size(); i++) {
     delete vector_choice[i];
@@ -41,7 +25,7 @@ bool read_page(std::ifstream & ifs,
       if (line_choice(line)) {  // const
         if (win || lose) {
           // free choice;
-          freeChoice(vector_choice);
+          //          freeChoice(vector_choice);
           std::cerr << "invalid section1: case 1\n";
           return false;
         }
@@ -55,7 +39,7 @@ bool read_page(std::ifstream & ifs,
       else if (line.find("WIN") == 0) {
         if (haveChoice || lose || win) {
           // free choice
-          freeChoice(vector_choice);
+          //freeChoice(vector_choice);
           std::cerr << "invalid section1: case 2\n";
           return false;
         }
@@ -64,7 +48,7 @@ bool read_page(std::ifstream & ifs,
       else if (line.find("LOSE") == 0) {
         if (haveChoice || lose || win) {
           // free chocie
-          freeChoice(vector_choice);
+          //freeChoice(vector_choice);
           std::cerr << "invalid section1: case 3\n";
           return false;
         }
@@ -73,7 +57,7 @@ bool read_page(std::ifstream & ifs,
       else if (line.find('#') == 0) {
         if (!haveChoice && !win && !lose) {
           // free choice
-          freeChoice(vector_choice);
+          //freeChoice(vector_choice);
           std::cerr << "no chocie or win or lose\n";
           return false;
         }
@@ -81,7 +65,7 @@ bool read_page(std::ifstream & ifs,
       }
       else {
         // free choice
-        freeChoice(vector_choice);
+        //freeChoice(vector_choice);
         std::cerr << "invalid line in section1 or section2\n";
         return false;
       }
@@ -110,6 +94,7 @@ int main(int argc, char ** argv) {
   bool ifValid = read_page(ifs, vector_choice, text, win, lose, pond);
   ifs.close();
   if (!ifValid) {
+    freeChoice(vector_choice);
     exit(EXIT_FAILURE);
   }
   Page p(0, text, vector_choice, win, lose);

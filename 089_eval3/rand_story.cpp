@@ -17,7 +17,7 @@ void make_path(std::map<int, std::map<int, int> > & parent, int & win) {
   int key = win;
   while (key != 1) {
     int k = parent[key].begin()->first;   //
-    int v = parent[key].begin()->second;  // the
+    int v = parent[key].begin()->second;  //
     std::vector<int> vec;
     vec.push_back(k);
     vec.push_back(v);
@@ -75,9 +75,8 @@ void make_child(std::vector<Page *> & vector_page, std::set<int> & reachable) {
     }
   }
   if (win_num == -1) {
-    std::cerr << "There is no way to win\n";
-    free_page(vector_page);
-    exit(EXIT_FAILURE);
+    std::cout << "There is no way to win\n";
+    return;
   }
   std::map<int, std::map<int, int> > parent;
   make_parent(child, parent);
@@ -96,8 +95,8 @@ void make_child(std::vector<Page *> & vector_page, std::set<int> & reachable) {
 bool all_reachable(std::vector<Page *> & vector_page,
                    std::set<int> & page_num,
                    std::vector<int> & diff) {
-  std::vector<int> check_vec;
-  std::set<int> reachable;
+  std::vector<int> check_vec;  // store the queuing page numbers waiting to be checked
+  std::set<int> reachable;     // store all reachable page numbers
   check_vec.push_back(1);
   reachable.insert(1);
   while (!check_vec.empty()) {
@@ -214,11 +213,14 @@ void read_pages(std::string & dir,
     }
     if (!validate_format(ifs)) {
       ifs.close();
+      page.clear();
       free_page(vector_page);
       exit(EXIT_FAILURE);
     }
+
     ifs.close();
     ifs.open(page.c_str(), std::ifstream::in);
+
     read_single_page(ifs, i, vector_page, page_num, choice_num, page_win, page_lose);
     ifs.close();
     i++;
@@ -363,7 +365,7 @@ void free_page(std::vector<Page *> & page) {
  *@param line: A reference to a line string.
  *@return bool.
 */
-bool line_choice(const std::string & line) {
+int line_choice(const std::string & line) {
   if (line.find(':') == std::string::npos) {
     return false;
   }
@@ -372,11 +374,14 @@ bool line_choice(const std::string & line) {
   const char * ptr = num.c_str();
   while (*ptr != '\0') {
     if (!isdigit(*ptr)) {
-      return false;
+      //return false;
+      return -1;
     }
     ptr++;
   }
-  return true;
+  //return true;
+  int num_int = atoi(num.c_str());
+  return num_int;
 }
 
 //read page
@@ -389,16 +394,23 @@ bool line_choice(const std::string & line) {
 bool validate_format(std::ifstream & ifs) {
   std::string line;
   bool haveChoice = false;
+  std::set<int> choice_set;
   bool win = false;
   bool lose = false;
   bool pond = false;
   while (getline(ifs, line)) {
     if (!pond) {
-      if (line_choice(line)) {
+      int ifChoice = line_choice(line);
+      if (ifChoice > 0) {
         if (win || lose) {
           std::cerr << "ERROR: read choice then lose or win\n";
           return false;
         }
+        if (choice_set.find(ifChoice) != choice_set.end()) {
+          std::cerr << "ERROR: duplicate choice numbers\n";
+          return false;
+        }
+        choice_set.insert(ifChoice);
         haveChoice = true;
       }
       else if (line.find("WIN") == 0) {

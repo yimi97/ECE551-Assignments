@@ -82,7 +82,7 @@ void execute(std::vector<Page *> & page);
 void free_page(std::vector<Page *> & page);
 
 // ================================== step1 ================================ //
-bool line_choice(const std::string & line);
+int line_choice(const std::string & line);
 bool validate_format(std::ifstream & ifs);
 void parseLine(std::string & line,
                std::vector<Choice *> & vector_choice,

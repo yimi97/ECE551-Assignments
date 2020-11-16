@@ -29,6 +29,7 @@ int main(int argc, char ** argv) {
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
     if (DEBUG)
       std::cout << "DEBUG: pages are not valid!\n";
+    free_page(vector_page);
     exit(EXIT_FAILURE);
   }
   else if (!all_reachable(vector_page, page_num, diff)) {
@@ -38,7 +39,6 @@ int main(int argc, char ** argv) {
       std::cout << "Page " << diff[i] << " is not reachable\n";
     }
     free_page(vector_page);
-    exit(EXIT_FAILURE);
   }
   else {
     if (DEBUG)

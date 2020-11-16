@@ -1,0 +1,14 @@
+I have created a new directory (invalid_pages) to store my test cases for testing invalid formats.
+
+page1: invalid lines between section 1 and 2.
+page2: invalid chars in choice number.
+page3: negtive number in choice number.
+page4: choice number "0123", though valid under eval3.
+page5: win and lose show together.
+page6: two wins or two loses.
+page7: normal choice and win/lose show together.
+page8: no section1 (choice).
+page9: no section2 (pond).
+page10: no section3 (text), though valid under eval3.
+page11: text section has lines with choice formats.
+page12: choice number " 123".
