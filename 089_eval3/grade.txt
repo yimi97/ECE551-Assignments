@@ -1,14 +1,18 @@
-Grading at 11/16/2020:05:46:13.520430
-For commit ID e951d83e51d549576239926adc2e30748e28f4f6
-Grading at Mon Nov 16 00:46:12 EST 2020
+Grading at 11/16/2020:06:01:46.001408
+For commit ID 682791cd3f3b769b15e9f558e4d2d2d85b7b3a00
+Grading at Mon Nov 16 01:01:44 EST 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 rm -f *.o *~
-g++     cyoa-step1.cpp   -o cyoa-step1
-<builtin>: recipe for target 'cyoa-step1' failed
-The code did not compile!
+make: 'cyoa-step1' is up to date.
+Testing ./cyoa-step1 story1/page1.txt 
+Your file matched the expected output
+Testing ./cyoa-step1 story1/page8.txt 
+Your file matched the expected output
+Testing ./cyoa-step1 story1/page11.txt 
+Your file matched the expected output
 
 Step 2
 Checking that cyoa-step2 compiles
@@ -32,15 +36,17 @@ Step 4
 Checking that cyoa-step4 compiles
 rm -f *.o *~
 g++     cyoa-step4.cpp   -o cyoa-step4
-<builtin>: recipe for target 'cyoa-step4' failed
-The code did not compile!
+Testing ./cyoa-step4 one_win 
+Your file matched the expected output
+Testing ./cyoa-step4 story1
+Your output matched the expected output
 
-Step 1: FAILED
+Step 1: PASSED
 Step 2: PASSED
 Step 3: PASSED
-Step 4: FAILED
+Step 4: PASSED
 
-You have NOT passed the pregrader's test cases.
-You should go back and debug the indicated step(s).
+You have passed the pregrader's test cases, but you should still
+do extensive testing of your own.
 
 Overall Grade: NO GRADE YET
