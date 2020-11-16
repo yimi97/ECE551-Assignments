@@ -1,49 +1,48 @@
-#include "rand_story.cpp"
-using namespace std;
-
+//#include "rand_story.cpp"
+#include "rand_story.hpp"
 int main(int argc, char ** argv) {
   if (argc != 2) {
     std::cerr << "USAGE: ./cyoa-step4 dir_name\n";
     exit(EXIT_FAILURE);
   }
   // read page1
-  ifstream ifs;
-  string page1 = argv[1];
+  std::ifstream ifs;
+  std::string page1 = argv[1];
   page1.append("/page1.txt");
-  ifs.open(page1.c_str(), ifstream::in);
+  ifs.open(page1.c_str(), std::ifstream::in);
   if (ifs.fail()) {
-    cerr << "ERROR: Cannot open page1.\n";
+    std::cerr << "ERROR: Cannot open page1.\n";
     exit(EXIT_FAILURE);
   }
   ifs.close();
   // read other pages
-  string dir = argv[1];
+  std::string dir = argv[1];
   dir.append("/page");
-  set<int> page_num;
-  set<int> choice_num;
+  std::set<int> page_num;
+  std::set<int> choice_num;
   bool page_win = false;
   bool page_lose = false;
-  vector<Page *> vector_page;
+  std::vector<Page *> vector_page;
 
   read_pages(dir, vector_page, page_num, choice_num, page_win, page_lose);
-  vector<int> diff;
+  std::vector<int> diff;
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
     if (DEBUG)
-      cout << "DEBUG: pages are not valid!\n";
+      std::cout << "DEBUG: pages are not valid!\n";
     exit(EXIT_FAILURE);
   }
 
   all_reachable(vector_page, page_num, diff);
-  set<int> reachable = page_num;
+  std::set<int> reachable = page_num;
   for (size_t i = 0; i < diff.size(); i++) {
     reachable.erase(diff[i]);
   }
   if (DEBUG) {
-    cout << "DEBUG: reachable pages include ";
-    for (set<int>::iterator it = reachable.begin(); it != reachable.end(); ++it) {
-      cout << *it << " ";
+    std::cout << "DEBUG: reachable pages include ";
+    for (std::set<int>::iterator it = reachable.begin(); it != reachable.end(); ++it) {
+      std::cout << *it << " ";
     }
-    cout << endl;
+    std::cout << std::endl;
   }
   make_child(vector_page, reachable);
   free_page(vector_page);

@@ -1,3 +1,5 @@
+#ifndef __RANDSTORY_HPP__
+#define __RANDSTORY_HPP__
 /*
 #include <algorithm>
 #include <cstdlib>
@@ -55,7 +57,11 @@ class Page {
   void printPage() const;
 };
 */
-#include "page.cpp"
+
+//#include "page.cpp"
+#include "choice.hpp"
+#include "headers.hpp"
+#include "page.hpp"
 
 // ================================== step4 ================================ //
 void make_path(std::map<int, std::map<int, int> > & parent, int & win);
@@ -96,3 +102,4 @@ void parseLine(std::string & line,
                bool & win,
                bool & lose,
                bool & pond);
+#endif

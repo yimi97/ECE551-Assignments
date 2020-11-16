@@ -1,3 +1,5 @@
+#ifndef __HEADERS_HPP__
+#define __HEADERS_HPP__
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
@@ -9,4 +11,7 @@
 #include <string>
 #include <vector>
 
-bool DEBUG = false;
+//bool DEBUG = false;
+#define DEBUG false
+
+#endif

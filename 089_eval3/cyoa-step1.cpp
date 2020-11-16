@@ -1,4 +1,5 @@
-#include "rand_story.cpp"
+//#include "rand_story.cpp"
+#include "rand_story.hpp"
 //using namespace std;
 int main(int argc, char ** argv) {
   if (argc != 2) {

@@ -1,3 +1,6 @@
+#ifndef __CHOICE_HPP__
+#define __CHOICE_HPP__
+
 #include "headers.hpp"
 class Choice {
  private:
@@ -13,3 +16,5 @@ class Choice {
   void testChoice() const { std::cout << "Choice is: " << c << "\n"; }
   void printChoice() const { std::cout << c << "\n"; }
 };
+
+#endif

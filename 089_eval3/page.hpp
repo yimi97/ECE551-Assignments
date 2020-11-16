@@ -1,4 +1,9 @@
-#include "choice.cpp"
+#ifndef __PAGE_HPP__
+#define __PAGE_HPP__
+
+//#include "choice.cpp"
+#include "choice.hpp"
+#include "headers.hpp"
 
 class Page {
  private:
@@ -23,3 +28,5 @@ class Page {
   void printText() const;
   void printPage() const;
 };
+
+#endif
