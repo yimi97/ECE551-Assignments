@@ -1,12 +1,12 @@
-Grading at 11/16/2020:22:36:28.631599
-For commit ID 235b231704e5a117a99dc25732cfa668b1da713f
-Grading at Mon Nov 16 17:36:25 EST 2020
+Grading at 11/16/2020:22:37:50.287143
+For commit ID 883266a4cd492f8921116a4809536588467f109a
+Grading at Mon Nov 16 17:37:48 EST 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 rm -f *.o *~
-g++ -o cyoa-step1 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step1.cpp
+make: 'cyoa-step1' is up to date.
 Testing ./cyoa-step1 story1/page1.txt 
 Your file matched the expected output
 Testing ./cyoa-step1 story1/page8.txt 
@@ -19,9 +19,9 @@ Checking that cyoa-step2 compiles
 rm -f *.o *~
 g++ -o cyoa-step2 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step2.cpp
 Testing ./cyoa-step2 story1 2\n1\n
-Your file did not match the expected ouput
+Your file matched the expected output
 Testing ./cyoa-step2 story1 1\n4\n1\n3\n
-Your file did not match the expected ouput
+Your file matched the expected output
 
 Step 3
 Checking that cyoa-step3 compiles
@@ -35,14 +35,14 @@ Your file did not match the expected ouput
 Step 4
 Checking that cyoa-step4 compiles
 rm -f *.o *~
-g++ -o cyoa-step4 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step4.cpp
+make: 'cyoa-step4' is up to date.
 Testing ./cyoa-step4 one_win 
 Your file did not match the expected ouput
 Testing ./cyoa-step4 story1
 Your output did not match the expected output
 
 Step 1: PASSED
-Step 2: FAILED
+Step 2: PASSED
 Step 3: FAILED
 Step 4: FAILED
 
