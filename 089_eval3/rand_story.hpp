@@ -95,7 +95,6 @@ void free_page(std::vector<Page *> & page);
 
 // ================================== step1 ================================ //
 
-bool validate_format(std::ifstream & ifs, std::vector<std::string> & myfile);
 int line_choice(const std::string & line);
 bool validate_format(std::ifstream & ifs);
 void parseLine(std::string & line,

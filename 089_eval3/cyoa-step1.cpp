@@ -24,7 +24,6 @@ int main(int argc, char ** argv) {
     std::cerr << "Bad input." << std::endl;
     exit(EXIT_FAILURE);
   }
-  /*
   if (!validate_format(ifs)) {
     ifs.close();
     exit(EXIT_FAILURE);
@@ -34,22 +33,6 @@ int main(int argc, char ** argv) {
   while (getline(ifs, line)) {
     parseLine(line, vector_choice, text, WIN, LOSE, pond);
   }
-  */
-
-  //
-  std::vector<std::string> myfile;
-  bool ifv = validate_format(ifs, myfile);
-  if (!ifv) {
-    freeChoice(vector_choice);
-    myfile.clear();
-    ifs.close();
-    exit(EXIT_FAILURE);
-  }
-  for (size_t i = 0; i < myfile.size(); i++) {
-    parseLine(myfile[i], vector_choice, text, WIN, LOSE, pond);
-  }
-  //
-
   ifs.close();
   Page p(0, text, vector_choice, WIN, LOSE);
   p.printPage();
