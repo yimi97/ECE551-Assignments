@@ -9,18 +9,18 @@
 #include <sstream>
 #include <string>
 #include <vector>
-using namespace std;
+//using namespace std;
 
 bool DEBUG = false;
-//
+
 class Choice {
  private:
   int num;
-  string c;
+  std::string c;
 
  public:
   Choice() : num(0), c(NULL){};
-  Choice(int n, string str) : num(n), c(str) {}
+  Choice(int n, std::string str) : num(n), c(str) {}
   ~Choice(){};
   Choice & operator=(const Choice & rhs) {
     if (this != &rhs) {
@@ -29,22 +29,22 @@ class Choice {
     }
     return *this;
   }
-  int getNum() { return num; }
-  void testChoice() { cout << "Choice is: " << c << "\n"; }
-  void printChoice() { cout << c << "\n"; }
+  int getNum() const { return num; }
+  void testChoice() const { std::cout << "Choice is: " << c << "\n"; }
+  void printChoice() const { std::cout << c << "\n"; }
 };
 
 class Page {
  private:
   int num;
-  vector<string> text;
-  vector<Choice *> choices;
+  std::vector<std::string> text;
+  std::vector<Choice *> choices;
   bool win;
   bool lose;
 
  public:
   Page() : num(), text(), choices(), win(false), lose(false) {}
-  Page(int n, vector<string> & t, vector<Choice *> & c, bool w, bool l) :
+  Page(int n, std::vector<std::string> & t, std::vector<Choice *> & c, bool w, bool l) :
       num(n),
       text(t),
       choices(),
@@ -77,43 +77,46 @@ class Page {
   bool getWin() const { return win; }
   bool getLose() const { return lose; }
   int getNum() const { return num; }
-  vector<string> getText() const { return text; }
+  std::vector<std::string> getText() const { return text; }
   int getChoiceNum() const { return choices.size(); }
-  vector<Choice *> getChoice() const { return choices; }
-  vector<int> getChoiceVec() {  // TODO: should be const
-    vector<int> v;
-    for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
+  std::vector<Choice *> getChoice() const { return choices; }
+  std::vector<int> getChoiceVec() const {  // TODO: should be const
+    std::vector<int> v;
+    for (std::vector<Choice *>::const_iterator it = choices.begin(); it != choices.end();
+         ++it) {
       v.push_back((*it)->getNum());
     }
     return v;
   }
-  void printText() {
-    for (vector<string>::iterator it = text.begin(); it != text.end(); ++it) {
-      cout << *it << "\n";
+  void printText() const {
+    for (std::vector<std::string>::const_iterator it = text.begin(); it != text.end();
+         ++it) {
+      std::cout << *it << "\n";
     }
   }
-  void printPage() {
-    //    cout << "DEBUG: " << getNum() << "\n";
+  void printPage() const {
     printText();
     if (win) {
-      cout << "\n";
-      cout << "Congratulations! You have won. Hooray!\n";
+      std::cout << "\n"
+                << "Congratulations! You have won. Hooray!\n";
     }
     else if (lose) {
-      cout << "\n";
-      cout << "Sorry, you have lost. Better luck next time!\n";
+      std::cout << "\n";
+      std::cout << "Sorry, you have lost. Better luck next time!\n";
     }
     else {
-      cout << "\n"
-           << "What would you like to do?\n\n";
+      std::cout << "\n"
+                << "What would you like to do?\n\n";
       if (!choices.empty()) {
         int i = 1;
-        for (vector<Choice *>::iterator it = choices.begin(); it != choices.end(); ++it) {
-          cout << " " << i << ". ";
+        for (std::vector<Choice *>::const_iterator it = choices.begin();
+             it != choices.end();
+             ++it) {
+          std::cout << " " << i << ". ";
           if (DEBUG) {
-            cout << "DEBUG: "
-                 << " " << i << ". "
-                 << "(" << (*it)->getNum() << ")";
+            std::cout << "DEBUG: "
+                      << " " << i << ". "
+                      << "(" << (*it)->getNum() << ")";
           }
           (*it)->printChoice();
           i++;
@@ -123,35 +126,41 @@ class Page {
   }
 };
 // ================================== step4 ================================ //
-void make_path(map<int, map<int, int> > & parent, int & win);
-void make_parent(map<int, vector<int> > & child, map<int, map<int, int> > & parent);
-void make_child(vector<Page *> & vector_page, set<int> & reachable);
+void make_path(std::map<int, std::map<int, int> > & parent, int & win);
+void make_parent(std::map<int, std::vector<int> > & child,
+                 std::map<int, std::map<int, int> > & parent);
+void make_child(std::vector<Page *> & vector_page, std::set<int> & reachable);
 
 // ================================== step3 ================================ //
-bool all_reachable(vector<Page *> & vector_page, set<int> & page_num, vector<int> & diff);
-bool equal_set(set<int> & s1, set<int> & s2, vector<int> & diff);
+bool all_reachable(std::vector<Page *> & vector_page,
+                   std::set<int> & page_num,
+                   std::vector<int> & diff);
+bool equal_set(std::set<int> & s1, std::set<int> & s2, std::vector<int> & diff);
 
 // ================================== step2 ================================ //
-void read_pages(string & dir,
-                vector<Page *> & vector_page,
-                set<int> & page_num,
-                set<int> & choice_num,
+void read_pages(std::string & dir,
+                std::vector<Page *> & vector_page,
+                std::set<int> & page_num,
+                std::set<int> & choice_num,
                 bool & page_win,
                 bool & page_lose);
-bool validate_page(set<int> & page_num, set<int> & choice_num, bool win, bool lose);
-bool compare_set(set<int> & set1, set<int> & set2);
-bool check_number(string s);
-bool check_number_valid(string s, Page * p);
+bool validate_page(std::set<int> & page_num,
+                   std::set<int> & choice_num,
+                   bool win,
+                   bool lose);
+bool compare_set(std::set<int> & set1, std::set<int> & set2);
+bool check_number(std::string s);
+bool check_number_valid(std::string s, Page * p);
 bool check_exit(Page * p);
-void execute(vector<Page *> & page);
-void free_page(vector<Page *> & page);
+void execute(std::vector<Page *> & page);
+void free_page(std::vector<Page *> & page);
 
 // ================================== step1 ================================ //
-bool line_choice(const string & line);
-bool validate_format(ifstream & ifs);
-void parseLine(string & line,
-               vector<Choice *> & vector_choice,
-               vector<string> & text,
+bool line_choice(const std::string & line);
+bool validate_format(std::ifstream & ifs);
+void parseLine(std::string & line,
+               std::vector<Choice *> & vector_choice,
+               std::vector<std::string> & text,
                bool & win,
                bool & lose,
                bool & pond);

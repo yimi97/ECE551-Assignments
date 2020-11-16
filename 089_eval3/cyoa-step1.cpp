@@ -1,20 +1,20 @@
 #include "rand_story.cpp"
-using namespace std;
+//using namespace std;
 int main(int argc, char ** argv) {
   if (argc != 2) {
     std::cerr << "USAGE: ./cyoa-step1 page.txt\n";
     exit(EXIT_FAILURE);
   }
-  string line;
-  vector<Choice *> vector_choice;
-  ifstream ifs;
-  vector<string> text;
+  std::string line;
+  std::vector<Choice *> vector_choice;
+  std::ifstream ifs;
+  std::vector<std::string> text;
   bool WIN = false;
   bool LOSE = false;
   bool pond = false;
-  ifs.open(argv[1], ifstream::in);
+  ifs.open(argv[1], std::ifstream::in);
   if (ifs.fail()) {
-    cerr << "Bad input." << endl;
+    std::cerr << "Bad input." << std::endl;
     exit(EXIT_FAILURE);
   }
   if (!validate_format(ifs)) {
@@ -22,7 +22,7 @@ int main(int argc, char ** argv) {
     exit(EXIT_FAILURE);
   }
   ifs.close();
-  ifs.open(argv[1], ifstream::in);
+  ifs.open(argv[1], std::ifstream::in);
   while (getline(ifs, line)) {
     parseLine(line, vector_choice, text, WIN, LOSE, pond);
   }
