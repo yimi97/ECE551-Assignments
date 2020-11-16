@@ -1,5 +1,51 @@
 #include "rand_story.hpp"
 
+bool validate_format(std::ifstream & ifs, std::vector<std::string> & myfile) {
+  std::string line;
+  bool haveChoice = false;
+  bool win = false;
+  bool lose = false;
+  bool pond = false;
+  while (getline(ifs, line)) {
+    myfile.push_back(line);
+    if (!pond) {
+      if (line_choice(line) > 0) {
+        if (win || lose) {
+          std::cerr << "ERROR: read choice then lose or win\n";
+          return false;
+        }
+        haveChoice = true;
+      }
+      else if (line.find("WIN") == 0) {
+        if (haveChoice || lose || win) {
+          std::cerr << "ERROR: win&&haveChocie or win&&win or win&&lose\n";
+          return false;
+        }
+        win = true;
+      }
+      else if (line.find("LOSE") == 0) {
+        if (haveChoice || lose || win) {
+          std::cerr << "ERROR: lose&&haveChocie or lose&&lose or win&&lose\n";
+          return false;
+        }
+        lose = true;
+      }
+      else if (line.find('#') == 0) {
+        if (!haveChoice && !win && !lose) {
+          std::cerr << "ERROR: no section 1\n";
+          return false;
+        }
+        pond = true;
+      }
+      else {
+        std::cerr << "ERROR: other invalid lines between setion 1 and 2\n";
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
 // ====================================== step4 =================================== //
 
 /*
@@ -184,6 +230,45 @@ void read_single_page(std::ifstream & ifs,
   }
 }
 
+// =====================
+void read_single_page(                  // std::ifstream & ifs,
+    std::vector<std::string> & myfile,  //
+    int i,
+    std::vector<Page *> & vector_page,
+    std::set<int> & page_num,
+    std::set<int> & choice_num,
+    bool & page_win,
+    bool & page_lose) {
+  std::string line;
+  std::vector<Choice *> vector_choice;
+  std::vector<std::string> text;
+  bool WIN = false;
+  bool LOSE = false;
+  bool pond = false;
+
+  //
+  //   while (getline(ifs, line)) {
+  //     parseLine(line, vector_choice, text, WIN, LOSE, pond);
+  //   }
+  //
+  for (size_t j = 0; j < myfile.size(); j++) {
+    parseLine(line, vector_choice, text, WIN, LOSE, pond);
+  }
+
+  Page * p = new Page(i, text, vector_choice, WIN, LOSE);
+  if (p->getWin()) {
+    page_win = true;
+  }
+  if (p->getLose()) {
+    page_lose = true;
+  }
+  vector_page.push_back(p);
+  page_num.insert(i);
+  for (size_t j = 0; j < vector_choice.size(); j++) {
+    choice_num.insert(vector_choice[j]->getNum());
+  }
+}
+
 /*
  *@a function used to read all pages.
  *@param dir: A directory name string.
@@ -211,17 +296,27 @@ void read_pages(std::string & dir,
     if (ifs.fail()) {
       break;
     }
+    /*
     if (!validate_format(ifs)) {
       ifs.close();
       page.clear();
       free_page(vector_page);
       exit(EXIT_FAILURE);
     }
-
     ifs.close();
     ifs.open(page.c_str(), std::ifstream::in);
-
     read_single_page(ifs, i, vector_page, page_num, choice_num, page_win, page_lose);
+    */
+    std::vector<std::string> myfile;
+    bool ifValid = validate_format(ifs, myfile);
+    if (!ifValid) {
+      free_page(vector_page);
+      myfile.clear();
+      ifs.close();
+      exit(EXIT_FAILURE);
+    }
+    read_single_page(myfile, i, vector_page, page_num, choice_num, page_win, page_lose);
+
     ifs.close();
     i++;
   }

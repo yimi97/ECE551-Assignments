@@ -1,0 +1,3 @@
+WIN
+#
+story5 page1

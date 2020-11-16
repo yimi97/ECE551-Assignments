@@ -27,8 +27,8 @@ int main(int argc, char ** argv) {
   read_pages(dir, vector_page, page_num, choice_num, page_win, page_lose);
   std::vector<int> diff;
   if (!validate_page(page_num, choice_num, page_win, page_lose)) {
-    if (DEBUG)
-      std::cout << "DEBUG: pages are not valid!\n";
+    std::cerr << "ERROR: pages are not valid as step2's constraint!\n";
+    free_page(vector_page);
     exit(EXIT_FAILURE);
   }
 

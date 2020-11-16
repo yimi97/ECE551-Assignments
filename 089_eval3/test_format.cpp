@@ -22,7 +22,7 @@ bool read_page(std::ifstream & ifs,
   bool haveChoice = false;
   while (getline(ifs, line)) {
     if (!pond) {
-      if (line_choice(line)) {  // const
+      if (line_choice(line) > 0) {  // const
         if (win || lose) {
           // free choice;
           //          freeChoice(vector_choice);
