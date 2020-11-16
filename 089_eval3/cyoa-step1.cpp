@@ -1,6 +1,5 @@
-//#include "rand_story.cpp"
-#include "rand_story.hpp"
-//using namespace std;
+#include "rand_story.cpp"
+
 int main(int argc, char ** argv) {
   if (argc != 2) {
     std::cerr << "USAGE: ./cyoa-step1 page.txt\n";

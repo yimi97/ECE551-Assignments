@@ -1,4 +1,3 @@
-
 #include "rand_story.hpp"
 
 // ====================================== step4 =================================== //
@@ -470,7 +469,7 @@ void parseLine(std::string & line,
 }
 
 // =================================== class method ================================= //
-/*
+
 Choice & Choice::operator=(const Choice & rhs) {
   if (this != &rhs) {
     num = rhs.num;
@@ -563,5 +562,3 @@ void Page::printPage() const {
     }  //else wrong
   }
 }
-
-*/

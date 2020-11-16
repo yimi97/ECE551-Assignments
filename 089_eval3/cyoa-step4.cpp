@@ -1,5 +1,5 @@
-//#include "rand_story.cpp"
-#include "rand_story.hpp"
+#include "rand_story.cpp"
+
 int main(int argc, char ** argv) {
   if (argc != 2) {
     std::cerr << "USAGE: ./cyoa-step4 dir_name\n";

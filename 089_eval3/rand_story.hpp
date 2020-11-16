@@ -1,6 +1,4 @@
-#ifndef __RANDSTORY_HPP__
-#define __RANDSTORY_HPP__
-/*
+
 #include <algorithm>
 #include <cstdlib>
 #include <fstream>
@@ -13,9 +11,7 @@
 #include <vector>
 
 bool DEBUG = false;
-*/
 
-/*
 class Choice {
  private:
   int num;
@@ -30,9 +26,7 @@ class Choice {
   void testChoice() const { std::cout << "Choice is: " << c << "\n"; }
   void printChoice() const { std::cout << c << "\n"; }
 };
-*/
 
-/*
 class Page {
  private:
   int num;
@@ -56,12 +50,6 @@ class Page {
   void printText() const;
   void printPage() const;
 };
-*/
-
-//#include "page.cpp"
-#include "choice.hpp"
-#include "headers.hpp"
-#include "page.hpp"
 
 // ================================== step4 ================================ //
 void make_path(std::map<int, std::map<int, int> > & parent, int & win);
@@ -102,4 +90,3 @@ void parseLine(std::string & line,
                bool & win,
                bool & lose,
                bool & pond);
-#endif
