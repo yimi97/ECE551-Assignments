@@ -252,7 +252,7 @@ void read_single_page(                  // std::ifstream & ifs,
   //   }
   //
   for (size_t j = 0; j < myfile.size(); j++) {
-    parseLine(line, vector_choice, text, WIN, LOSE, pond);
+    parseLine(myfile[i], vector_choice, text, WIN, LOSE, pond);
   }
 
   Page * p = new Page(i, text, vector_choice, WIN, LOSE);
