@@ -1,12 +1,12 @@
-Grading at 11/16/2020:22:41:47.009885
-For commit ID e5d8c6d63cf4183f812084c925e0d96f5774d8a9
-Grading at Mon Nov 16 17:41:43 EST 2020
+Grading at 11/16/2020:23:28:20.063463
+For commit ID 228296a1a4535a335aa6f181267d69a7ad800bf5
+Grading at Mon Nov 16 18:28:18 EST 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 rm -f *.o *~
-g++ -o cyoa-step1 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step1.cpp
+make: 'cyoa-step1' is up to date.
 Testing ./cyoa-step1 story1/page1.txt 
 Your file matched the expected output
 Testing ./cyoa-step1 story1/page8.txt 
@@ -17,7 +17,7 @@ Your file matched the expected output
 Step 2
 Checking that cyoa-step2 compiles
 rm -f *.o *~
-g++ -o cyoa-step2 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step2.cpp
+make: 'cyoa-step2' is up to date.
 Testing ./cyoa-step2 story1 2\n1\n
 Your file matched the expected output
 Testing ./cyoa-step2 story1 1\n4\n1\n3\n
