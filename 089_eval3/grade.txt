@@ -1,12 +1,12 @@
-Grading at 11/16/2020:08:27:09.525037
-For commit ID 90bbad4c56d61f1d45182966fb2c8b765e17d9e4
-Grading at Mon Nov 16 03:27:07 EST 2020
+Grading at 11/16/2020:22:32:44.265046
+For commit ID e258fc36be355e65b1f025348c14b83a6844019f
+Grading at Mon Nov 16 17:32:41 EST 2020
 Doing some basic sanity checking for your submission
 
 Step 1
 Checking that cyoa-step1 compiles
 rm -f *.o *~
-make: 'cyoa-step1' is up to date.
+g++ -o cyoa-step1 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step1.cpp
 Testing ./cyoa-step1 story1/page1.txt 
 Your file matched the expected output
 Testing ./cyoa-step1 story1/page8.txt 
@@ -17,36 +17,36 @@ Your file matched the expected output
 Step 2
 Checking that cyoa-step2 compiles
 rm -f *.o *~
-make: 'cyoa-step2' is up to date.
+g++ -o cyoa-step2 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step2.cpp
 Testing ./cyoa-step2 story1 2\n1\n
-Your file matched the expected output
+Your file did not match the expected ouput
 Testing ./cyoa-step2 story1 1\n4\n1\n3\n
-Your file matched the expected output
+Your file did not match the expected ouput
 
 Step 3
 Checking that cyoa-step3 compiles
 rm -f *.o *~
-make: 'cyoa-step3' is up to date.
+g++ -o cyoa-step3 --std=gnu++98 -pedantic -Wall -Werror -ggdb3 cyoa-step3.cpp
 Testing ./cyoa-step3 story1 
 Your file matched the expected output
 Testing ./cyoa-step3 cycle 
-Your file matched the expected output
+Your file did not match the expected ouput
 
 Step 4
 Checking that cyoa-step4 compiles
 rm -f *.o *~
-g++     cyoa-step4.cpp   -o cyoa-step4
+make: 'cyoa-step4' is up to date.
 Testing ./cyoa-step4 one_win 
-Your file matched the expected output
+Your file did not match the expected ouput
 Testing ./cyoa-step4 story1
-Your output matched the expected output
+Your output did not match the expected output
 
 Step 1: PASSED
-Step 2: PASSED
-Step 3: PASSED
-Step 4: PASSED
+Step 2: FAILED
+Step 3: FAILED
+Step 4: FAILED
 
-You have passed the pregrader's test cases, but you should still
-do extensive testing of your own.
+You have NOT passed the pregrader's test cases.
+You should go back and debug the indicated step(s).
 
 Overall Grade: NO GRADE YET
