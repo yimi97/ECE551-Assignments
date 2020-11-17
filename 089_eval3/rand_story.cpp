@@ -122,7 +122,7 @@ bool all_reachable(std::vector<Page *> & vector_page,
 }
 
 /*
- *@a function used justify if two sets are equal.
+ *@a function used justify if two sets are equal and change the var diff.
  *@param s1: A set of int.
  *@param s2: A set of int.
  *@param diff: A vector of int stored the unreacable page numbers.
@@ -150,7 +150,7 @@ bool equal_set(std::set<int> & s1, std::set<int> & s2, std::vector<int> & diff) 
  *@param choice_num: A reference to a set of int used to store choice numbers.
  *@param page_win: A reference to a bool stored if has WIN page.
  *@param page_lose: A reference to a bool stored if has LOSE page.
- *@return bool.
+ *@return void.
 */
 void read_single_page(std::ifstream & ifs,
                       int i,
@@ -218,7 +218,6 @@ void read_pages(std::string & dir,
     ifs.close();
     ifs.open(page.c_str(), std::ifstream::in);
     read_single_page(ifs, i, vector_page, page_num, choice_num, page_win, page_lose);
-
     ifs.close();
     i++;
   }
@@ -250,7 +249,6 @@ bool validate_page(std::set<int> & page_num,
 */
 bool compare_set(std::set<int> & set1, std::set<int> & set2) {
   std::vector<int> diff;
-  // TODO: cite
   set_symmetric_difference(
       set1.begin(), set1.end(), set2.begin(), set2.end(), back_inserter(diff));
   return (diff.size() == 1 && diff[0] == 1) || (diff.size() == 0);
@@ -344,9 +342,9 @@ void free_page(std::vector<Page *> & page) {
 // ====================================== step1 =================================== //
 
 /*
- *@a function used to check if the line is a choice line.
+ *@a function used to check if the line is a choice line, mainly by check the number and colon.
  *@param line: A reference to a line string.
- *@return bool.
+ *@return int.
 */
 int line_choice(const std::string & line) {
   if (line.find(':') == std::string::npos) {
@@ -357,17 +355,13 @@ int line_choice(const std::string & line) {
   const char * ptr = num.c_str();
   while (*ptr != '\0') {
     if (!isdigit(*ptr)) {
-      //return false;
       return -1;
     }
     ptr++;
   }
-  //return true;
   int num_int = atoi(num.c_str());
   return num_int;
 }
-
-//read page
 
 /*
  *@a function used read page and check format.
@@ -467,10 +461,15 @@ void parseLine(std::string & line,
 
 Choice & Choice::operator=(const Choice & rhs) {
   if (this != &rhs) {
-    num = rhs.num;
-    c = rhs.c;
+    num = rhs.getNum();
+    c = rhs.getC();
   }
   return *this;
+}
+
+Choice::Choice(const Choice & rhs) {
+  num = rhs.getNum();
+  c = rhs.getC();
 }
 
 Page::Page(int n,
@@ -499,15 +498,28 @@ Page & Page::operator=(const Page & rhs) {
     for (int i = 0; i < getChoiceNum(); i++) {
       delete choices[i];
     }
+    choices.clear();
     num = rhs.getNum();
     text = rhs.getText();
     win = rhs.getWin();
     lose = rhs.getLose();
     for (int i = 0; i < rhs.getChoiceNum(); i++) {
-      choices.push_back(rhs.getChoice()[i]);
+      Choice * cho = new Choice(*(rhs.getChoice()[i]));
+      choices.push_back(cho);
     }
   }
   return *this;
+}
+
+Page::Page(const Page & rhs) {
+  num = rhs.getNum();
+  text = rhs.getText();
+  win = rhs.getWin();
+  lose = rhs.getLose();
+  for (int i = 0; i < rhs.getChoiceNum(); i++) {
+    Choice * cho = new Choice(*(rhs.getChoice()[i]));
+    choices.push_back(cho);
+  }
 }
 
 std::vector<int> Page::getChoiceVec() const {

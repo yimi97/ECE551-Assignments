@@ -20,8 +20,11 @@ class Choice {
   Choice(int n, std::string str) : num(n), c(str) {}
   ~Choice() {}
   Choice & operator=(const Choice & rhs);
+  Choice(const Choice & rhs);
   // return the number of the choice
   int getNum() const { return num; }
+  // return the choice
+  std::string getC() const { return c; }
   // print the choice text with prefix, used for debug
   void testChoice() const { std::cout << "Choice is: " << c << "\n"; }
   // print the choice text
@@ -41,6 +44,7 @@ class Page {
   Page(int n, std::vector<std::string> & t, std::vector<Choice *> & c, bool w, bool l);
   ~Page();
   Page & operator=(const Page & rhs);
+  Page(const Page & rhs);
   // return win flag
   bool getWin() const { return win; }
   // return lose flag
