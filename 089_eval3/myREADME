@@ -1,4 +1,4 @@
-I have created a new directory (invalid_pages) to store my test cases for testing invalid formats.
+1. I have created a new directory (invalid_pages) to store my test cases for testing invalid formats.
 
 page1: invalid lines between section 1 and 2.
 page2: invalid chars in choice number.
@@ -12,3 +12,8 @@ page9: no section2 (pond).
 page10: no section3 (text), though valid under eval3.
 page11: text section has lines with choice formats.
 page12: choice number " 123".
+page13: choice number is 0.
+page14: duplicate choice numbers.
+
+2. I have created a new directory (story3) to store my test cases for testing  a cycle.
+ 
