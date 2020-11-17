@@ -30,6 +30,10 @@ int main(int argc, char ** argv) {
   }
   ifs.close();
   ifs.open(argv[1], std::ifstream::in);
+  if (ifs.fail()) {
+    std::cerr << "Bad input." << std::endl;
+    exit(EXIT_FAILURE);
+  }
   while (getline(ifs, line)) {
     parseLine(line, vector_choice, text, WIN, LOSE, pond);
   }
